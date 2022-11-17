@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+	<!--   font links   -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+
+    <div class="admin">
+        <div class="leftSide" id="left">
+            
+            <div class="body">
+                <div class="head">
+                    <div class="log">
+                        <div class="log">
+                            <div class="log-img"><img src="imgs/logo.png" alt="log" srcset=""></div>
+                            <div class="log-name">Pweb</div>
+                        </div>
+                        <div class="menu dis">
+                            <i class="" id="adm-menu"></i>
+                        </div>
+                    </div>
+                </div>
+               <div class="first">
+                    <h3>menu</h3>
+                    <div class="second"> 
+                        <h4>Dashboard</h4>
+                        <div class="links">
+                            <ul>
+                                <li>
+                                    <a href="admin.html">Home</a>
+                                    <a href="adm-articles.html">Articles</a>
+                                    <a href="comment.html">Comments</a>
+                                    <a href="user-msg.html">User Message</a>
+                                    <a href="#">User Leave</a>
+                                </li>
+                            </ul>
+                        </div>
+                   </div>
+                   
+               </div>
+               
+               
+               <a href="login.html" class="logout">login</a>
+
+            </div>
+                
+            
+        </div>
+        <div class="rightSide">
+           <div class="head">
+                <div class="head-2 show">
+                    <div class="menu" id="adm-menu">
+                        <i class="las la-bars " id="adm-icon"></i>
+                    </div>
+                    <div class="log">
+                        <div class="log">
+                            <div class="log-img"><img src="imgs/logo.png" alt="log" srcset=""></div>
+                            <div class="log-name">Pweb</div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="search">
+					<div class="input">
+						<input type="text" placeholder="Search anything">
+					</div>
+					<div class="btn">
+						<i class="las la-search icon"></i>
+					</div>
+					
+				</div>
+                <div class="user">
+                    <div class="user-img">
+                        <img src="imgs/test-user-img.jpg" alt="">
+                    </div>
+                    <div class="user-name">
+                        John Doe
+                    </div>
+                </div>
+           </div>
+           <div class="body">
+            <div class="container">
+                <div class="update">
+                    <h2>Update articles</h2>
+                    <div class="form">
+                        <form action="art-update" method="post">
+                            <label for="title">Article title</label>
+                            <input type="text" name="title"><br>
+                            <label for="img">Article images</label>
+                            <input type="file" name="img" id="img"><br>
+                            <label for="content">Article content</label>
+                            <textarea name="content" id="myTextarea" cols="30" rows="10"></textarea>
+                            <br>
+                            <input type="submit" value="update changes">
+                        </form>
+                    </div>
+                </div>
+            </div>  
+           </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
+	<script src="js/adm_custom.js"></script>
+</body>
+</html>
