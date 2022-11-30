@@ -4,24 +4,44 @@
   box-sizing: border-box;
 }
 
+.input-control input {
+  border: 1px solid #aba7a7;
+}
+
+.input-control textarea {
+  border: 1px solid #aba7a7;
+}
+
 .input-control .error {
   color: #ff3860;
 }
 
-.input-control input {
+.input-control input, textarea {
   color: black;
 }
 
-.input-control input:focus {
+.input-control input:focus, textarea:focus {
   outline: none;
 }
 
-.input-control.success input, textarea {
+.input-control.success input {
+  border-color: #09c372;
+}
+
+.input-control.success .error {
   color: #09c372;
 }
 
-.input-control.error input, textarea {
-  color: #ff3860;
+.input-control.success textarea {
+  border-color: #09c372;
+}
+
+.input-control.error input {
+  border-color: #ff3860;
+}
+
+.input-control.error textarea {
+  border-color: #ff3860;
 }
 
 body {
@@ -890,37 +910,20 @@ body {
 .contact .container .row .form form {
   margin: 30px;
 }
-.contact .container .row .form form .input-control input:focus {
-  outline: none;
-}
-.contact .container .row .form form .input-control.success input, .contact .container .row .form form textarea {
-  color: #09c372;
-}
-.contact .container .row .form form .input-control.error input, .contact .container .row .form form textarea {
-  color: #ff3860;
-}
-.contact .container .row .form form .input-control .error {
-  color: #ff3860;
-}
 .contact .container .row .form form input[type=text], .contact .container .row .form form input[type=email] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: none;
   border-radius: 3px;
-  font-size: 17px;
-  color: black;
 }
 .contact .container .row .form form textarea {
   width: 100%;
   height: 150px;
-  padding: 2px 0px;
+  padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  border-radius: 3px;
   background-color: #f8f8f8;
-  color: #000;
 }
 .contact .container .row .form form input[type=submit] {
   cursor: pointer;
@@ -1379,13 +1382,13 @@ body {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  border-radius: 3px;
 }
 .comments .leave-comment .container .form form textarea {
   width: 100%;
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f8f8f8;
 }
@@ -1455,10 +1458,9 @@ body {
   padding: 12px 10px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid black;
-  background-color: #f5f5f5;
-  font-size: 25px;
+  background-color: white;
+  border-radius: 3px;
+  font-size: 20px;
   color: black;
 }
 .login .container .row .form form .login {

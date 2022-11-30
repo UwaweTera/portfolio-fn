@@ -1,6 +1,4 @@
-
 var menu = document.getElementById("adm-icon");
-
 menu.addEventListener("click",function(){
     
     let left = document.getElementById("left");
