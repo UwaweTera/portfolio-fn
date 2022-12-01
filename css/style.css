@@ -688,20 +688,19 @@ body {
 .footer .container .row .col-5 .box h1 {
   margin: 10px 0;
 }
-.footer .container .row .col-5 .box .box-form {
+.footer .container .row .col-5 .box .input-control {
   margin: 15px 0;
   position: relative;
 }
-.footer .container .row .col-5 .box .box-form input[type=text] {
+.footer .container .row .col-5 .box .input-control input[type=text] {
   border-radius: 25px;
   height: 42px;
-  border: none;
   padding: 0 115px 0 20px;
   width: 100%;
   color: white;
   background-color: #0B112F;
 }
-.footer .container .row .col-5 .box .box-form input[type=submit] {
+.footer .container .row .col-5 .box .input-control input[type=submit] {
   position: absolute;
   top: 3px;
   right: 5px;
