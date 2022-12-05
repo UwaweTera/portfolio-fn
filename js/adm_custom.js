@@ -19,7 +19,6 @@ menu.addEventListener("click",function(){
         this.style.display = "none";
     })
 });
-
 //form validation
 let title = document.getElementById("title");
 let img = document.getElementById("img");
