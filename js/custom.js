@@ -56,12 +56,15 @@ function formValidation(){
     const emailValue = email.value.trim();
     const textValue = msg.value.trim();
 
+    let checkNum = /[0-9]/g;
     if(nameValue === ""){
         setError(userName,"name is required");
     }else if(nameValue.length < 3){
-        setError(userName,"Your name is Too row");
+        setError(userName,"name should be between 3 to 20 characters long");
     }else if(nameValue.length > 30){
         setError(userName,"Your name is long");
+    }else if(nameValue.match(checkNum)){
+        setError(userName,"numbers not allowed");
     }else{
         success(userName);
     }
@@ -77,8 +80,8 @@ function formValidation(){
 
     if(textValue === ""){
         setError(msg,"message is required");
-    }else if(textValue.length < 3){
-        setError(msg,"Your name is Too row at least 4 char");
+    }else if(textValue.length < 10){
+        setError(msg,"Explain message briefly, at least 10 characters");
     }else{
         success(msg);
     }
