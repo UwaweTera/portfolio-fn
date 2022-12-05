@@ -51,8 +51,11 @@ function success(element){
 
 
 function formValidation(){
+
     const titleValue = title.value.trim();
     const contentValue = content.value.trim();
+
+    alert(contentValue);
 
     let specialChar =/[^a-zA-Z]/g;
     if(titleValue === ""){
@@ -67,8 +70,10 @@ function formValidation(){
         success(title);
     }
 
-    if(contentValue === ""){
+    if(contentValue == ""){
         setError(content,"article content required");
+    }else if(contentValuelength > 200){
+        setError(title,"Describe articles brifly, at least 200 charcters");
     }else{
         success(content);
     }
