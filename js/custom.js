@@ -56,6 +56,7 @@ function formValidation(){
     const emailValue = email.value.trim();
     const textValue = msg.value.trim();
 
+
     let checkNum = /[0-9]/g;
     if(nameValue === ""){
         setError(userName,"name is required");
@@ -65,6 +66,7 @@ function formValidation(){
         setError(userName,"Your name is long");
     }else if(nameValue.match(checkNum)){
         setError(userName,"numbers not allowed");
+
     }else{
         success(userName);
     }
@@ -82,6 +84,7 @@ function formValidation(){
         setError(msg,"message is required");
     }else if(textValue.length < 10){
         setError(msg,"Explain message briefly, at least 10 characters");
+
     }else{
         success(msg);
     }
