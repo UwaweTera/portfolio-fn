@@ -866,7 +866,7 @@ body{
                     h1{
                         margin: 10px 0;
                     }
-                    .box-form{
+                    .input-control{
                         margin: 15px 0;
                         position: relative;
                         input[type='text']{
@@ -2070,8 +2070,6 @@ body{
                         display: block;
                         padding: 15px 50px 15px 20px;
                         border-radius: 2px;
-                        border: none;
-                        
                     }
                     
                 }
@@ -2288,7 +2286,6 @@ body{
                             padding: 12px 20px;
                             margin: 0 0;
                             box-sizing: border-box;
-                            border: 1px solid $lightGray;
                             border-radius: 5px;
                         }
                         textarea{
@@ -2296,7 +2293,6 @@ body{
                             height: 150px;
                             padding: 12px 20px;
                             box-sizing: border-box;
-                            border: 2px solid #ccc;
                             border-radius: 4px;
                             background-color: #f8f8f8;
     
