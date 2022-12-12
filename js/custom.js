@@ -353,9 +353,11 @@ if(commForm){
             if(nameValue && emailValue && textValue){
 
                 if (count == 3) {
+                    let articleId = location.href.split('=')[1];
                     function comments(){
                         let commentData = JSON.parse(localStorage.getItem('commentData')) || [];
                         commentData.push({
+                            artId: articleId,
                             name: nameValue,
                             email: emailValue,
                             message: textValue
@@ -393,32 +395,37 @@ if(commForm){
 function commentDisplay(){
     const cont = document.querySelector(".comment-container");
     if (cont) {
+        let articleId = location.href.split('=')[1];
     if (localStorage.getItem(("commentData"))) {
+        
         let location = JSON.parse(localStorage.getItem("commentData"));
         
             cont.innerHTML = "";
             location.forEach((data) => {
-                cont.innerHTML += `
-                <div class="user-comm">
-                        
-                    <div class="row">
-                        <div class="col-img">
-                            <img src="imgs/user-comm.png" alt="">
-                        </div>
-                        <div class="col-content">
-                            <div class="head">
-                                <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
+                if(data.artId == articleId){
+                    cont.innerHTML += `
+                    <div class="user-comm">
+                            
+                        <div class="row">
+                            <div class="col-img">
+                                <img src="imgs/user-comm.png" alt="">
                             </div>
-                            <div class="body">
-                                <h2>${data.name}</h2>
-                            </div>
-                            <div class="comm-footer">
-                            <p>${data.message} </p>
+                            <div class="col-content">
+                                <div class="head">
+                                    <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
+                                </div>
+                                <div class="body">
+                                    <h2>${data.name}</h2>
+                                </div>
+                                <div class="comm-footer">
+                                <p>${data.message} </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `;
+                    `;
+                }
+               
             }); 
         }else{
             cont.innerHTML = "0 blog";
@@ -429,6 +436,95 @@ function commentDisplay(){
     }
 }
 commentDisplay(); 
+
+//count comment 
+
+function countComment(){
+    let getComment = JSON.parse(localStorage.getItem("commentData"));
+    let commElement = document.querySelectorAll("#commLength");
+    let commLength = 0;
+    let articleId = location.href.split('=')[1];
+    if (getComment) {
+        getComment.forEach(data=>{
+            if (data.artId ==  articleId) {
+                commLength++
+            }
+            
+        });
+        for (let i = 0; i < commElement.length; i++) {
+            const elm = commElement[i];
+            elm.innerHTML += commLength
+        }
+    }else{
+        for (let i = 0; i < commElement.length; i++) {
+            const elm = commElement[i];
+            elm.innerHTML = 0;
+        }
+    }
+    
+}
+countComment();
+
+
+//adding like
+const like = document.getElementById("like");
+let likeQty = document.getElementById("likeQty");
+if (like) {
+    let articleId = location.href.split('=')[1];
+    
+    like.addEventListener("click",function(){
+        this.classList.toggle("liking");
+       
+        if (this.classList.contains("liking")) {
+            likeQty.value = parseInt(likeQty.value) + 1;  
+            likeQtyVal = likeQty.value;
+            let data = {
+                articleId: articleId,
+                likeCount : likeQtyVal
+            }
+            let locLike = getLike() || [];
+            locLike.push(data);
+            sendLike(locLike);
+        }else{
+            
+            likeQty.value = parseInt(likeQty.value) - 1;  
+            let locLike = getLike();
+            if (locLike) {
+                locLike.pop();
+                sendLike(locLike);
+            }
+        }
+    });
+    //get like local storage  data
+    function getLike(){
+        let locLike = JSON.parse(localStorage.getItem('likes'));
+        return locLike;
+    }
+    //send like local storage  data
+    function sendLike(data){
+        localStorage.setItem('likes',JSON.stringify(data));
+    }
+    
+    let likeDisplay = ()=>{
+        let articleId = location.href.split('=')[1];
+        const likeLoc = getLike();
+        let count = 0;
+        if (likeLoc) {
+            likeLoc.forEach((data,index)=>{
+                if (data.articleId  == articleId) {
+                    count++;
+                }
+            })
+        
+            likeQty.value = count;
+            
+            console.log();
+        }else{
+            likeQty.value = 0;
+        }
+    }
+    likeDisplay();
+}
 
 
 
@@ -482,68 +578,39 @@ commentDisplay();
     }
     art_detailDisplay(); 
 
-    
+
+// display elements
+
+let blog_id = location.href.split("=")[1];
 
 
-//count comment 
+//display blogs
+function blogDisplay(){
+    const cont = document.querySelector("#blog_display");
+    cont.innerHTML  = "one";
+    if (cont) {
+    if (localStorage.getItem(("articleData"))) {
+        let location = JSON.parse(localStorage.getItem("articleData"))[blog_id];
+            cont.innerHTML = "";
+                cont.innerHTML = `
+                <div class="head">
+                    <h1>${location.head}</h1>
+                    <p> UPDATED ON: AUGUST 30, 2022
+                    </p>
+                </div>
 
-function countComment(){
-    let getComment = JSON.parse(localStorage.getItem("commentData"));
-    let commElement = document.querySelectorAll("#commLength")
-    let commLength = 0;
-    if (getComment) {
-        getComment.forEach(data=>{
-            commLength++
-        });
-        for (let i = 0; i < commElement.length; i++) {
-            const elm = commElement[i];
-            elm.innerHTML += commLength
-        }
-    }else{
-        commElement.innerHTML = 0;
-    }
-    
-}
-countComment();
-
-
-//adding like
-const like = document.getElementById("like");
-
-if (like) {
-    let likeCount = 1;
-like.addEventListener("click",function(){
-    let getLike = JSON.parse(localStorage.getItem("like"));
-    if (getLike) {
-        let getStatus = getLike.status;
-        if (getStatus === 'off') {
-            this.classList.add('liking');
-            likeCount++;
-            let data = {count: likeCount, status: 'on'};
-            localStorage.setItem("like",JSON.stringify(data));
-
+                <div class="body">
+                    <div class="body-img">
+                        <img src="${location.image}" alt="">
+                    </div>
+                    <div class="body-content">
+                       ${location.data}
+                    </div>
+                </div>
+                `;
         }else{
-            likeCount--;
-            let data = {count: likeCount, status: 'off'};
-            localStorage.setItem("like",JSON.stringify(data));
-            this.classList.remove("liking")
-        }
-    }else{
-        this.classList.add('liking');
-        let data = {count: likeCount, status: 'on'};
-        localStorage.setItem("like",JSON.stringify(data));   
+            cont.innerHTML = "0 blog";
+        }      
     }
-    
-    
-});
 }
-
-
-
-
-//getting current blog
-
-let hrefLoc = window.location.href;
-
-console.log(hrefLoc.split(""))
-
+blogDisplay(); 
