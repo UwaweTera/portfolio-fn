@@ -58,6 +58,15 @@
             
         </div>
         <div class="rightSide">
+            	<!-- popup -->
+                <div id="myModal" class="modal">
+
+                    <div class="modal-content">
+                    <p id="popupMsg"></p>
+                    <button id="myBtn">ok</button>
+                    </div>
+                
+                </div>
            <div class="head">
                 <div class="head-2 show">
                     <div class="menu" id="adm-menu">
@@ -93,9 +102,8 @@
             <div class="container">
                 
 
-
+                
                 <h2>add new article</h2>
-
                 <div class="form">
                     <form method="post" id="adm_form">
                         <div class="input-control">
@@ -103,7 +111,7 @@
 							<input type="text" name="title" placeholder="Enter title" id="title"><br>
 							<div class="error"></div>
 						</div>
-                        
+
                         <div class="input-control">
 							<label for="img">Article images</label>
                              <input type="file" name="img" id="img"><br>
@@ -111,8 +119,8 @@
 						</div>
 
                         <div class="input-control">
-                            <label for="content">Article content</label>
-                            <textarea name="content" id="myTextarea" cols="30" rows="10"></textarea>
+                            <label for="content">Article Description</label>
+                            <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
 							<div class="error"></div>
 						</div>
                        
@@ -124,58 +132,21 @@
 
                 <div class="table" style="margin: 50px 0">
                     <h1>all articles</h1>
-                    <table >
-                        <tr>
-                            <th>No</th>
-                            <th>Article Title</th>
-                            <th>Article content</th>
-                            <th>Update</th>
-                            <th>Delete</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>best motherboard that used...</td>
-                            <td>You can view more about our article...</td>
-                            <td class="approve">
-                                <a href="art-update.html">update</a>
-                            </td>
-                            <td class="delete">
-                                <button>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>best motherboard that used...</td>
-                            <td>You can view more about our article...</td>
-                            <td class="approve">
-                                <a href="art-update.html">update</a>
-                            </td>
-                            <td class="delete">
-                                <button>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>best motherboard that used...</td>
-                            <td>You can view more about our article...</td>
-                            <td class="approve">
-                                <a href="art-update.html">update</a>
-                            </td>
-                            <td class="delete">
-                                <button>Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>best motherboard that used...</td>
-                            <td>You can view more about our article...</td>
-                            <td class="approve">
-                                <a href="art-update.html">update</a>
-                            </td>
-                            <td class="delete"> 
-                                <button>Delete</button>
-                            </td>
-                        </tr>
+                    <table class="art-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Article Title</th>
+                                <th>Article content</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+
+                        </tbody>
+                        
                     </table>
                 </div>
             </div>
@@ -186,9 +157,7 @@
     </div>
 
 
-
-
-    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
-	<script src="js/adm_custom.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+   <script src="js/adm_custom.js"></script>
 </body>
 </html>
