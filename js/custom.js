@@ -585,7 +585,7 @@ let blog_id = location.href.split("=")[1];
 //display blogs
 function blogDisplay(){
     const cont = document.querySelector("#blog_display");
-    cont.innerHTML  = "one";
+    // cont.innerHTML  = "one";
     if (cont) {
     if (localStorage.getItem(("articleData"))) {
         let location = JSON.parse(localStorage.getItem("articleData"))[blog_id];
