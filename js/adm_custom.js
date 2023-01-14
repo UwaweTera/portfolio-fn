@@ -2,7 +2,6 @@ let txtarea = document.getElementById("myTextarea");
 if(txtarea){
     CKEDITOR.replace("myTextarea");
 }
-
 var menu = document.getElementById("adm-icon");
 
 menu.addEventListener("click",function(){
