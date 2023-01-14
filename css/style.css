@@ -4,6 +4,47 @@
   box-sizing: border-box;
 }
 
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal button {
+  background-color: #008CBA;
+  padding: 5px 30px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background 0.5s;
+}
+.modal button:hover {
+  opacity: 0.7;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.liking {
+  color: #008CBA;
+  font-weight: bold;
+}
+
 .input-control input {
   border: 1px solid #aba7a7;
 }
@@ -1243,11 +1284,11 @@ body {
   text-transform: capitalize;
   font-size: 25px;
 }
-.subs .box .box-form {
+.subs .box .input-control {
   margin: 15px 0;
   position: relative;
 }
-.subs .box .box-form input[type=text] {
+.subs .box .input-control input[type=text] {
   border-radius: 25px;
   height: 50px;
   border: none;
@@ -1256,7 +1297,7 @@ body {
   color: white;
   background-color: #fff;
 }
-.subs .box .box-form input[type=submit] {
+.subs .box .input-control input[type=submit] {
   position: absolute;
   top: 4px;
   right: 5px;
@@ -1302,14 +1343,17 @@ body {
   text-decoration: none;
 }
 .comments .container .art-footer .comment a i {
-  font-size: 18px;
+  font-size: 30px;
 }
 .comments .container .art-footer .comment a p {
   background-color: #008CBA;
   color: #fff;
-  padding: 5px;
   border-radius: 50%;
   margin: 0 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
 }
 .comments .container .art-footer .like a {
   align-items: center;
@@ -1318,14 +1362,17 @@ body {
   text-decoration: none;
 }
 .comments .container .art-footer .like a i {
-  font-size: 18px;
+  font-size: 30px;
 }
 .comments .container .art-footer .like a p {
   background-color: #008CBA;
   color: #fff;
-  padding: 5px;
   border-radius: 50%;
   margin: 0 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
 }
 .comments .container .user-comm {
   border-top: 1px solid #E7E6E6;
@@ -1639,7 +1686,6 @@ body {
   display: block;
   padding: 15px 50px 15px 20px;
   border-radius: 2px;
-  border: none;
 }
 .admin .rightSide .head .search .btn {
   position: absolute;
@@ -1805,7 +1851,6 @@ body {
   padding: 12px 20px;
   margin: 0 0;
   box-sizing: border-box;
-  border: 1px solid #aba7a7;
   border-radius: 5px;
 }
 .body .container .form form textarea {
@@ -1813,7 +1858,6 @@ body {
   height: 150px;
   padding: 12px 20px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f8f8f8;
 }
@@ -1943,6 +1987,9 @@ body {
 
 .rightSide {
   width: 100%;
+}
+.rightSide .comment .table {
+  overflow-x: auto;
 }
 .rightSide .comment .table .pedding a {
   display: block;

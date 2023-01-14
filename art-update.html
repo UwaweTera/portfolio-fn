@@ -94,15 +94,27 @@
                 <div class="update">
                     <h2>Update articles</h2>
                     <div class="form">
-                        <form action="art-update" method="post">
-                            <label for="title">Article title</label>
-                            <input type="text" name="title"><br>
-                            <label for="img">Article images</label>
-                            <input type="file" name="img" id="img"><br>
-                            <label for="content">Article content</label>
-                            <textarea name="content" id="myTextarea" cols="30" rows="10"></textarea>
+                        <form method="post" id="adm_form">
+                            <div class="input-control">
+                                <label for="title">Article title</label>
+                                <input type="text" name="title" placeholder="Enter title" id="title"><br>
+                                <div class="error"></div>
+                            </div>
+                            
+                            <div class="input-control">
+                                <label for="img">Article images</label>
+                                 <input type="file" name="img" id="img"><br>
+                                <div class="error"></div>
+                            </div>
+    
+                            <div class="input-control">
+                                <label for="content">Article content</label>
+                                <textarea name="content" id="myTextarea" cols="30" rows="10"></textarea>
+                                <div class="error"></div>
+                            </div>
+                           
                             <br>
-                            <input type="submit" value="update changes">
+                            <input type="submit" value="add new">
                         </form>
                     </div>
                 </div>

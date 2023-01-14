@@ -65,6 +65,15 @@
 		
 	</nav>
 
+		<!-- popup -->
+		<div id="myModal" class="modal">
+
+			<div class="modal-content">
+			<p id="popupMsg"></p>
+			<button id="myBtn">ok</button>
+			</div>
+		
+		</div>
     
 
 
@@ -140,13 +149,20 @@
 
     <div class="subs">
         <div class="box">
-            <h1>Subscribe to the Newsletter</h1>
+            <h1>Subscribe to get more articles</h1>
             <p>Get our latest news, tutorials, guides, tips & deals delivered to your inbox.
             </p>
-            <div class="box-form">
+			<form action="" id="sub_form">
+				<div class="input-control">		
+					<input type="text" placeholder="Enter Email" id="sub-email">
+					<input type="submit" value="SUBMIT">
+					<div class="error"></div>
+				</div>
+			</form>
+<!--             <div class="box-form">
                 <input type="text" placeholder="Enter Email">
                 <input type="submit" value="Sign Up With Me">
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -156,110 +172,31 @@
 
     <div class="comments">
         <div class="container">
-            <h1>5 comment</h1>
+            <h1><span id="commLength"></span> comment</h1>
             <div class="art-footer">
                 <div class="comment">
                     <a href="#">
                         <i class="las la-comment"></i>
-                        <p>50</p>
+                        <p id="commLength"></p>
                     </a>
                     
                 </div>
                 <div class="like">
-                    <a href="#">
-                        <i class="las la-thumbs-up"></i>
+                    <a href="javascript:void(0)">
+                        <i class="las la-thumbs-up" id="like"></i>
                         <p>20</p>
                     </a>
                     
                 </div>
             </div>
+            <div class="comment-container">
 
-            <div class="user-comm">
-                        
-                <div class="row">
-                    <div class="col-img">
-                        <img src="imgs/user-comm.png" alt="">
-                    </div>
-                    <div class="col-content">
-                        <div class="head">
-                            <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
-                        </div>
-                        <div class="body">
-                            <h2>john Eddie</h2>
-                        </div>
-                        <div class="comm-footer">
-                           <p>Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.
-                        </p>
-                        </div>
-                    </div>
-                </div>
             </div>
+            
 
 
-            <div class="user-comm">
-                        
-                <div class="row">
-                    <div class="col-img">
-                        <img src="imgs/test-user-img.jpg" alt="">
-                    </div>
-                    <div class="col-content">
-                        <div class="head">
-                            <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
-                        </div>
-                        <div class="body">
-                            <h2>john Eddie</h2>
-                        </div>
-                        <div class="comm-footer">
-                           <p>Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-            <div class="user-comm">
-                        
-                <div class="row">
-                    <div class="col-img">
-                        <img src="imgs/user-comm.png" alt="">
-                    </div>
-                    <div class="col-content">
-                        <div class="head">
-                            <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
-                        </div>
-                        <div class="body">
-                            <h2>john Eddie</h2>
-                        </div>
-                        <div class="comm-footer">
-                           <p>Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="user-comm">
-                        
-                <div class="row">
-                    <div class="col-img">
-                        <img src="imgs/user-comm.png" alt="">
-                    </div>
-                    <div class="col-content">
-                        <div class="head">
-                            <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
-                        </div>
-                        <div class="body">
-                            <h2>john Eddie</h2>
-                        </div>
-                        <div class="comm-footer">
-                           <p>Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.Hi Miljeteig,thanks for sharing this list. these are the such a nice themes.great job.
-                        </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
 
 
@@ -273,27 +210,27 @@
                     <h2>LEAVE COMMENT</h2>
                 </div>
                     <div class="form">
-                        <form action="" method="post" id="form">
+                        <form  method="post"  id="contact-form">
                             <div class="input-control">
                                 <label for="name">Name</label><br>
-                                <input type="text" placeholder="Your name" id="name"><br>
+                                <input type="text" placeholder="Your name" id="name" class="commName"><br>
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="email">Your Email</label><br>
-                                <input type="text" placeholder="Your Email" id="email"><br>
+                                <input type="text" placeholder="Your Email" id="email" class="commEmail"><br>
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="name">Comment</label><br>
-                                <textarea name="" cols="30" rows="10" placeholder="type the comment..." id="msg"></textarea>
+                                <textarea name="" cols="30" rows="10" placeholder="type the comment..." id="msg" class="commMsg"></textarea>
                                 <div class="error"></div>
                             </div>
                            
                             
                             
                             
-                            <input type="submit" value="POST COMMENT">
+                            <input type="submit" value="POST COMMENT" >
                         </form>
                     </div>
             </div>
@@ -390,8 +327,7 @@
 						<h1>join our website</h1>
 						<p>there is no cost to join our website</p>
 						<form action="" id="sub_form">
-							<div class="input-control">
-								
+							<div class="input-control">		
 								<input type="text" placeholder="Enter Email" id="sub-email">
 								<input type="submit" value="SUBMIT">
 								<div class="error"></div>
