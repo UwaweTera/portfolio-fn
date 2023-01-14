@@ -40,9 +40,8 @@
                                 <li>
                                     <a href="admin.html">Home</a>
                                     <a href="adm-articles.html">Articles</a>
-                                    <a href="comment.html">Comments</a>
                                     <a href="user-msg.html">User Message</a>
-                                    <a href="#">User Leave</a>
+                                    <a href="adminSignup.html">Admin Signup</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,10 +50,19 @@
                </div>
                
                
-               <a href="login.html" class="logout">login</a>
+               <a href="#" class="logout">logout</a>
 
             </div>
                 
+            	<!-- popup -->
+                <div id="myModal" class="modal">
+
+                    <div class="modal-content">
+                    <p id="popupMsg"></p>
+                    <button id="myBtn">ok</button>
+                    </div>
+                
+                </div>
             
         </div>
         <div class="rightSide">
@@ -82,11 +90,9 @@
 				</div>
                 <div class="user">
                     <div class="user-img">
-                        <img src="imgs/test-user-img.jpg" alt="">
+                        <img src="imgs/user.png" alt="">
                     </div>
-                    <div class="user-name">
-                        John Doe
-                    </div>
+                    <div class="user-name" id="adminName"></div>
                 </div>
            </div>
            <div class="body comment">

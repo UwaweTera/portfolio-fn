@@ -54,15 +54,16 @@
 
             </div>
                 
-        <!-- popup -->
-        <div id="myModal" class="modal">
+            	<!-- popup -->
+                <div id="myModal" class="modal">
 
-            <div class="modal-content">
-            <p id="popupMsg"></p>
-            <button id="myBtn">ok</button>
-            </div>
-        
-        </div>    
+                    <div class="modal-content">
+                    <p id="popupMsg"></p>
+                    <button id="myBtn">ok</button>
+                    </div>
+                
+                </div>
+            
         </div>
         <div class="rightSide">
            <div class="head">
@@ -97,38 +98,27 @@
            <div class="body comment">
 
 
-
             <div class="container">
-                <h2>all comments</h2>
-                <div class="table">
-                    <div class="comment-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Commented name</th>
-                                    <th>Comment</th>
-                                    <th>delete</th>
-                                </tr>
-                            </thead>
-    
-    
-                            <tbody>
-    
-                              <!--   <tr>
-                                    <td>1</td>
-                                    <td>John Doe</td>
-                                    <td>This article is very good...</td>
-                                    
-                                </tr> -->
-    
-                            </tbody>
-                            
-                            
-                        </table>
-                    </div>
-                    
-                </div>
+                <h2 style="text-align: center;">Admin Signup</h2>   
+                <div class="form adminForm">
+                    <form method="POST" id="admin_form" action="adminSignup.html">
+						<div class="error"></div>
+						<div class="input-control">
+							<label for="name">Enter Name</label><br>
+							<input type="text" placeholder="Your name" id="name"><br>
+						</div>
+                       <div class="input-control">
+							<label for="email">Enter Email</label><br>
+							<input type="text" placeholder="Your Email" id="email"><br>
+					   </div>
+                       <div class="input-control">
+                            <label for="password">Enter Password</label><br>
+                            <input type="password" placeholder="Enter Passord" id="pin"><br>
+					   </div>
+
+						<input type="submit" value="SUBMIT">
+					</form>
+                </div>   
             </div>
 
            </div>
@@ -139,7 +129,7 @@
 
 
 
-    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
-	<script src="js/adm_custom.js"></script>
+    <script src="ckeditor/ckeditor.js"></script>
+    <script src="js/adm_custom.js"></script>
 </body>
 </html>
