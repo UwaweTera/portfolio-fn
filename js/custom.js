@@ -518,7 +518,6 @@ if (like) {
         
             likeQty.value = count;
             
-            console.log();
         }else{
             likeQty.value = 0;
         }
