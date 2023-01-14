@@ -1364,7 +1364,7 @@ body {
 .comments .container .art-footer .like a i {
   font-size: 30px;
 }
-.comments .container .art-footer .like a p {
+.comments .container .art-footer .like a p, .comments .container .art-footer .like a #likeQty {
   background-color: #008CBA;
   color: #fff;
   border-radius: 50%;
@@ -1373,6 +1373,9 @@ body {
   height: 30px;
   text-align: center;
   line-height: 30px;
+}
+.comments .container .art-footer .like a #likeQty {
+  border: none;
 }
 .comments .container .user-comm {
   border-top: 1px solid #E7E6E6;

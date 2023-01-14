@@ -90,6 +90,7 @@ function formValidation(){
 
     let inputData = CKEDITOR.instances.myTextarea.getData();
 
+
     if(inputData == ""){
         setError(content,"article content required");
     }else if(inputData.length < 100 ){

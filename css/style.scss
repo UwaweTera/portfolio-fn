@@ -1704,7 +1704,7 @@ body{
                                 i{
                                     font-size: 30px;
                                 }
-                                p{
+                                p,#likeQty{
                                     background-color: $lightBlue;
                                     color: $white;
                                     border-radius: 50%;
@@ -1713,6 +1713,9 @@ body{
                                     height: 30px;
                                     text-align: center;
                                     line-height: 30px;
+                                }
+                                #likeQty{
+                                    border: none;
                                 }
                             }
                         }
@@ -1751,7 +1754,6 @@ body{
                 }
             }
 
-            
         }
     }
 
