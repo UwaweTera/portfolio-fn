@@ -357,7 +357,7 @@ if(commForm){
                     function comments(){
                         let commentData = JSON.parse(localStorage.getItem('commentData')) || [];
                         commentData.push({
-                            artId: articleId,
+                            artId: articleId;
                             name: nameValue,
                             email: emailValue,
                             message: textValue
@@ -396,8 +396,7 @@ function commentDisplay(){
     const cont = document.querySelector(".comment-container");
     if (cont) {
         let articleId = location.href.split('=')[1];
-    if (localStorage.getItem(("commentData"))) {
-        
+    if (localStorage.getItem(("commentData"))) 
         let location = JSON.parse(localStorage.getItem("commentData"));
         
             cont.innerHTML = "";
@@ -425,7 +424,7 @@ function commentDisplay(){
                     </div>
                     `;
                 }
-               
+
             }); 
         }else{
             cont.innerHTML = "0 blog";
@@ -610,6 +609,9 @@ function blogDisplay(){
         }else{
             cont.innerHTML = "0 blog";
         }      
+
     }
+    
 }
 blogDisplay(); 
+

@@ -2,7 +2,6 @@ let txtarea = document.getElementById("myTextarea");
 if(txtarea){
     CKEDITOR.replace("myTextarea");
 }
-
 var menu = document.getElementById("adm-icon");
 
 menu.addEventListener("click",function(){
@@ -90,6 +89,7 @@ function formValidation(){
     }
 
     let inputData = CKEDITOR.instances.myTextarea.getData();
+
 
     if(inputData == ""){
         setError(content,"article content required");
