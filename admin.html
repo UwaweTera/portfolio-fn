@@ -15,7 +15,6 @@
 </head>
 <body>
     
-
     <div class="admin">
         <div class="leftSide" id="left">
             
@@ -40,9 +39,8 @@
                                 <li>
                                     <a href="admin.html">Home</a>
                                     <a href="adm-articles.html">Articles</a>
-                                    <a href="comment.html">Comments</a>
                                     <a href="user-msg.html">User Message</a>
-                                    <a href="#">User Leave</a>
+                                    <a href="adminSignup.html">Admin Signup</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,7 +49,7 @@
                </div>
                
                
-               <a href="login.html" class="logout">login</a>
+               <a href="#" class="logout">logout</a>
 
             </div>
                 
@@ -82,11 +80,9 @@
 				</div>
                 <div class="user">
                     <div class="user-img">
-                        <img src="imgs/test-user-img.jpg" alt="">
+                        <img src="imgs/user.png" alt="">
                     </div>
-                    <div class="user-name">
-                        John Doe
-                    </div>
+                    <div class="user-name" id="adminName"></div>
                 </div>
            </div>
            <div class="body">
@@ -97,7 +93,7 @@
                         </div>
     
                         <div class="box-body">
-                            <p class="num" id="subNum"></p>
+                            <p class="num" id="userNum"></p>
                             <p class="txt">Users</p>
                         </div>
                     </div>
@@ -119,31 +115,16 @@
                 <div class="review">
                     <div class="box">
                         <div class="box-head">
-                            <img src="imgs/visiters.png" alt="">
-                        </div>
-    
-                        <div class="box-body">
-                            <p class="num">200</p>
-                            <p class="txt">Views</p>
-                        </div>
-                    </div>
-
-
-                    <div class="box">
-                        <div class="box-head">
                             <img src="imgs/subscribe.png" alt="">
                         </div>
     
                         <div class="box-body">
-                            <p class="num" id="subNum"></p>
+                            <p class="num" id="subNum">3</p>
                             <p class="txt">subscribers</p>
                         </div>
                      </div>
 
                 </div>
-
-
-
 
                 <div class="articles">
                     <div class="container">
@@ -156,6 +137,7 @@
                                     <th>No</th>
                                     <th>Article Title</th>
                                     <th>Article content</th>
+                                    <th>comments</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>

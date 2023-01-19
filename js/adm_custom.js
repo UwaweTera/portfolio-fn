@@ -1,9 +1,52 @@
+const adminToken = JSON.parse(localStorage.getItem('token'));
+if (adminToken == null) {
+    window.location.replace('login.html');
+}
+
+//some global variables and functions
 let txtarea = document.getElementById("myTextarea");
 if(txtarea){
     CKEDITOR.replace("myTextarea");
 }
-var menu = document.getElementById("adm-icon");
+//getting token to admin
 
+const getName = adminToken.name;
+const getToken = adminToken.token;
+
+const header = new Headers();
+header.append('Content-Type', 'application/json');
+header.append('Authorization', `Bearer ${getToken}`)
+
+//popup message error
+const popup = (msg)=>{
+    //popup part
+    modal.style.display = "block";
+    document.getElementById("popupMsg").innerHTML = msg
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        location.reload();
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        location.reload();
+        }
+    } 
+ }
+
+ //admin name
+ const adminName = ()=>{
+    const adminName = document.getElementById('adminName');
+    if (adminName) {
+        return adminName.innerHTML = getName;
+    }
+ }
+ adminName()
+
+
+
+//menu bar
+var menu = document.getElementById("adm-icon");
 menu.addEventListener("click",function(){
     
     let left = document.getElementById("left");
@@ -23,21 +66,23 @@ menu.addEventListener("click",function(){
 let modal = document.getElementById("myModal");
 
 let closeBtn = document.getElementById("myBtn");
-
-
 //form validation
 let title = document.getElementById("title");
-let img = document.getElementById("img");
-let content = document.getElementById("myTextarea");
-let adm_form = document.getElementById("adm_form");
+let image = document.getElementById("image");
+let body = document.getElementById("myTextarea");
+let addBlogs = document.getElementById("addBlogs");
 let selectedId = -1;
-//for update
+//for blog
+let addBlogBtn = document.getElementById('addBlogBtn');
+if (addBlogBtn) {
+    addBlogBtn.value = 'Add Blog'; 
+}
+
 let selectedIndex = -1;
-if(adm_form){
-    adm_form.addEventListener("submit",function(e){
+if(addBlogs){
+    addBlogs.addEventListener("submit",function(e){
         e.preventDefault();
-        formValidation();
-        
+        addBlogValidation();
     });   
 }
 
@@ -60,92 +105,75 @@ function success(element){
 
 
 
-function formValidation(){
-
+ function addBlogValidation(){
     const titleValue = title.value.trim();
-    const imgValue = img.files;
-    const contentValue = content.value.trim();
+    const imageValue = image.files;
+    const bodyValue = body.value.trim();
     let count = 0;
-    let specialChar =/[^a-zA-Z]{4}$/g;
-    if(titleValue === ""){
-        setError(title,"title is required");
-    }else if(titleValue.length < 10){
-        setError(title,"Title should be between 10 to 50 characters long");
-    }else if(specialChar.test(titleValue)){
-        setError(title,"much special characters and numbers not allowed at least 4");
-    }else if(titleValue.length > 100){
-        setError(title,"Your name is long, use at least 100 characters");
-    }else{
-        success(title);
-        count++;
-    }
+    try {
+        if (selectedId == -1) {
+            let inputData = CKEDITOR.instances.myTextarea.getData();
+            if (imageValue.length > 0) {
+                const reader = new FileReader();
+                    reader.addEventListener("load",async()=>{
+                        const response = await fetch('https://my-bland.cyclic.app/blogs',{
+                            method: 'POST',
+                            headers: header,
+                            body: JSON.stringify({
+                                head: titleValue,
+                                image: reader.result,
+                                body: inputData 
+                            })
+                        })
+                        const res = await response.json();
+                        
+                        if(res.head == titleValue){
+                            const successMsg = 'Blog created';
+                            popup(successMsg)
+                        }else{
+                            setError(res)
+                        }
 
-
-    if(imgValue.length  == 0){
-        setError(img,"Image required");
-    }else{
-        success(img);
-        count++;
-    }
-
-    let inputData = CKEDITOR.instances.myTextarea.getData();
-
-
-    if(inputData == ""){
-        setError(content,"article content required");
-    }else if(inputData.length < 100 ){
-        setError(content,"Describe articles brifly, at least 200 charcters");
-
-    }else{
-        success(content);
-        count++;
-    }
-   
-    if(titleValue && imgValue && inputData){
-
-        if (count == 3) {
-            const reader = new FileReader();
-            reader.addEventListener("load",()=>{
-                let data = {
-                    head: titleValue,
-                    image: reader.result,
-                    data: inputData 
-                };
-                
-                if (selectedId == -1) {
-                    let getData = JSON.parse(localStorage.getItem('articleData')) || [];
-                    getData.push(data);
-                    localStorage.setItem("articleData", JSON.stringify(getData));
-                }else{
-                    let prevData = JSON.parse(localStorage.getItem('articleData'));
-                    if (prevData) {
-                        prevData.splice(selectedId, 1, data);
-                        localStorage.setItem("articleData", JSON.stringify(prevData));
-                    }
-                    
-                }
-               
+                    })
+                    reader.readAsDataURL(imageValue[0]);
+            }else{
+                setError('Image required')
+            }
+        }else{
             
-                
-                
-                //popup part
-                modal.style.display = "block";
-                document.getElementById("popupMsg").innerHTML = "Articles Created";
-                closeBtn.onclick = function() {
-                    modal.style.display = "none";
-                    location.reload();
-                }
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                    modal.style.display = "none";
-                    location.reload();
-                    }
-                }  
-            })
-            reader.readAsDataURL(imgValue[0]);
-            
+            let inputData = CKEDITOR.instances.myTextarea.getData();
+            addBlogBtn.value = 'Update Blog';
+            if (imageValue.length > 0) {
+                const reader = new FileReader();
+                    reader.addEventListener("load",async()=>{
+                        console.log(selectedId)
+                        const response = await fetch(`https://my-bland.cyclic.app/blogs/${selectedId}/update`,{
+                            method: 'PATCH',
+                            headers: header,
+                            body: JSON.stringify({
+                                head: titleValue,
+                                image: reader.result,
+                                body: inputData 
+                            })
+                        })
+                        const res = await response.json();
+                        
+                        if(res.head == titleValue){
+                            const successMsg = 'Blog Updated';
+                            popup(successMsg)
+                        }else{
+                            setError(res)
+                        }
+
+                    })
+                    reader.readAsDataURL(imageValue[0]);
+            }else{
+                setError('Image required')
+            }
         }
         
+    } catch (error) {
+        console.log(error)
     }
 
     }
@@ -154,12 +182,13 @@ function formValidation(){
 
 
         //display article table section
-           function articleTable(){
+           async function articleTable(){
             const artCont = document.querySelector(".art-table");
+            const response = await fetch('https://my-bland.cyclic.app/blogs');
+            const blogs =  await response.json();
             if (artCont) {
                 const tbody = artCont.querySelector("tbody")
-                if (localStorage.getItem(("articleData"))) {
-                    let location = JSON.parse(localStorage.getItem("articleData"));
+                if (blogs) {
                     const cutStr = (val,size)=>{
                         let newString = val.split(" ");
                         let newArr = newString.slice(0, size);
@@ -171,18 +200,22 @@ function formValidation(){
                     }
                     tbody.innerHTML = "";
                     let no = 1;
-
-                    location.forEach((data,index) => {
+                    let id = ""
+                    blogs.forEach((data) => {
+                        id = JSON.stringify(data._id);
                         tbody.innerHTML += `
                         <tr>
                             <td>${no++}</td>
                             <td>${data.head}</td>
-                            <td>${cutStr(data.data,5)}...</td>
+                            <td>${cutStr(data.body,5)}...</td>
+                            <td class="">
+                                <a href='comment.html?id=${data._id}'>view comments</a>
+                            </td>
                             <td class="approve">
-                                <a href="#" onclick = "update(${index})">update</a>
+                                <a href="#" onclick = 'update(${id})'>update</a>
                             </td>
                             <td class="pedding">
-                                <a href="#" onclick = "delet(${index})">delete</a>
+                                <a href="#" onclick = 'blogDelete(${id})'>delete</a>
                             </td>
                         </tr>
                         `;
@@ -197,61 +230,77 @@ function formValidation(){
         }
         articleTable(); 
     
-        function delet(index){
-            let loc = JSON.parse(localStorage.getItem("articleData"));
-            loc.splice(index, 1);
-            localStorage.setItem("articleData",JSON.stringify(loc));
+        async function blogDelete(id){
+            try {
+                const response = await fetch(`https://my-bland.cyclic.app/blogs/${id}`,{
+                    method: 'DELETE',
+                    headers: header
+                })
+                const del = await response.json();
+
+                if (del.msg == 'blog deleted') {
+                    //popup complite message
+                    modal.style.display = "block";
+                    document.getElementById("popupMsg").innerHTML = del.msg;
+                    closeBtn.onclick = function() {
+                        modal.style.display = "none";
+                        location.reload();
+                    }
+                    window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                        location.reload();
+                        }
+                    }
+                    contactDisplay();
+                }
+            } catch (error) {
+                console.log(error)
+            }
             articleTable(); 
         }
         
         //update articles
         
-         function update(index){
-            selectedId = index;
-            let getLoc = JSON.parse(localStorage.getItem('articleData'))[index];
+        async function update(id){
+            selectedId = id;
+            addBlogBtn.value = 'Update Blog';
+            const response = await fetch(`https://my-bland.cyclic.app/blogs/${id}`)
+            const blog = await response.json();
+            document.getElementById("title").value = blog.head;
+            function submitaftersetdata() {
+                this.updateElement();
+            }
+            CKEDITOR.instances.myTextarea.setData(blog.body,submitaftersetdata);
+
+            /* let getLoc = JSON.parse(localStorage.getItem('articleData'))[index];
             document.getElementById("title").value = getLoc.head;
             function submitaftersetdata() {
                 this.updateElement();
             }
-            CKEDITOR.instances.myTextarea.setData(getLoc.data,submitaftersetdata);
+            CKEDITOR.instances.myTextarea.setData(getLoc.data,submitaftersetdata); */
         }    
-       
 // count subscribed users
 
-function subCount(){
-    let getSub= JSON.parse(localStorage.getItem("subData"));
-    let subElm = document.querySelectorAll("#subNum")
-    let subLength = 0;
-    if (getSub) {
-        getSub.forEach(data=>{
-            subLength++;
-        });
-        for (let i = 0; i < subElm.length; i++) {
-            const elm = subElm[i];
-            elm.innerHTML += subLength
-        }
-    }else{
-        subElm.innerHTML += 0;   
-    }
+async function userCount(){
+    const response = await fetch('https://my-bland.cyclic.app/user',{
+                method: 'GET',
+                headers: header
+    });
+    const users =  await response.json();
+    let userElm = document.getElementById("userNum")
+    userElm.innerHTML = users.length
 }
-subCount();
+userCount();
 
 
 // count articles
 
-function artCount(){
-    let getArt= JSON.parse(localStorage.getItem("articleData"));
-    let artElm = document.querySelector("#artNum");
-    if (artElm) {
-        let artLength = 0;
-        if (getArt) {
-            getArt.forEach(data=>{
-                artLength++;
-            });
-            artElm.innerHTML = artLength;
-        }
-    }
-    
+async function artCount(){
+    const response = await fetch('https://my-bland.cyclic.app/blogs');
+    const blogs =  await response.json();
+    let blogElm = document.getElementById("artNum")
+    blogElm.innerHTML = blogs.length
 }
 artCount();
 
@@ -259,27 +308,33 @@ artCount();
 
         // display contact messages
 
-        function contactDisplay(){
+        async function contactDisplay(){
             const tbody = document.getElementById("contact-table");
+            const response = await fetch('https://my-bland.cyclic.app/messages',{
+                method: 'GET',
+                headers: header
+            });
+            const messages =  await response.json();
             if (tbody) {
-                if (localStorage.getItem(("contactData"))) {
-                    let location = JSON.parse(localStorage.getItem("contactData"));
+                if (messages.length > 0) {
+                    // let location = JSON.parse(localStorage.getItem("contactData"));
                     
                     tbody.innerHTML = "";
                     let no = 1;
-                     location.forEach((data,index) => {
+                    let id = "";
+                    messages.forEach((data,index) => {
+                        id = JSON.stringify(data._id);
                         tbody.innerHTML += `
                         <tr>
                             <td>${no++}</td>
                             <td>${data.name}</td>
                             <td>${data.message}</td>
                             <td class="pedding">
-                                <a href="#" onclick = "contactDel(${index})">delete</a>
+                                <a href="#" onclick='contactDel(${id})'>delete</a>
                             </td>
                         </tr>
                         `;
                     }); 
-                    
                 }else{
                     tbody.innerHTML = "0 result";
                 }
@@ -287,34 +342,63 @@ artCount();
            
         }
         contactDisplay(); 
-    
-        function contactDel(index){
-            let loc = JSON.parse(localStorage.getItem("contactData"));
-            loc.splice(index, 1);
-            localStorage.setItem("contactData",JSON.stringify(loc));
-            contactDisplay(); 
+
+        //delete message
+        async function contactDel(id){
+            try {
+                const response = await fetch(`https://my-bland.cyclic.app/messages/${id}`,{
+                    method: 'DELETE',
+                    headers: header
+                })
+                const del = await response.json();
+
+                if (del == 'message deleted') {
+                    //popup complite message
+                    modal.style.display = "block";
+                    document.getElementById("popupMsg").innerHTML = del;
+                    closeBtn.onclick = function() {
+                        modal.style.display = "none";
+                        location.reload();
+                    }
+                    window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                        location.reload();
+                        }
+                    }
+                    contactDisplay();
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            
+            
         }
 
 
     //display comment section
 
-    function commentDisplay(){
+    async function commentDisplay(){
         const commCont = document.querySelector(".comment-table");
-        if (commCont) {
+        let blog_id = location.href.split("=")[1];
+        let response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}/comments`);
+        let comments = await response.json();
+        
+        if (blog_id) {
             const tbody = commCont.querySelector("tbody"); 
-            if (localStorage.getItem(("commentData"))) {
-                let location = JSON.parse(localStorage.getItem("commentData"));
-                
+            if (comments != '0 comment') {
                 tbody.innerHTML = "";
                 let no = 1;
-                 location.forEach((data,index) => {
+                let id = "";
+                 comments.forEach((data) => {
+                    id = JSON.stringify(data._id);
                     tbody.innerHTML += `
                     <tr>
                         <td>${no++}</td>
                         <td>${data.name}</td>
-                        <td>${data.message}</td>
+                        <td>${data.comment}</td>
                         <td class="pedding">
-                            <a href="#" onclick = "del(${index})">delete</a>
+                            <a href="javascript:void(0)" onclick = 'commDelete(${id})'>delete</a>
                         </td>
                     </tr>
                     `;
@@ -329,11 +413,97 @@ artCount();
         
     }
     commentDisplay();
+    //delete comment
+    async function commDelete(id){
+        try {
+            let blog_id = location.href.split("=")[1];
+            const response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}/comments/${id}`,{
+                method: 'DELETE',
+                headers: header
+            })
+            const del = await response.json();
 
-    function del(index){
-        let loc = JSON.parse(localStorage.getItem("commentData"));
-        loc.splice(index, 1);
-        localStorage.setItem("commentData",JSON.stringify(loc));
-        commentDisplay(); 
+            if (del == 'comment deleted') {
+                popup(del)
+                commentDisplay();
+            }else{
+                alert(del.error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
+    // logout
+    const logout = document.querySelector('.logout');
+    logout.addEventListener('click',()=>{
+        localStorage.removeItem('token');
+        window.location.replace('login.html')
+    })
+
+
+
+//admin signup
+
+let userName = document.getElementById("name");
+let userEmail = document.getElementById("email");
+let pin = document.getElementById("pin");
+let adminForm = document.getElementById("admin_form");
+
+
+if(adminForm){
+    adminForm.addEventListener("submit",function(e){
+        e.preventDefault();
+        formValidation();
+    });   
+}
+
+function setError(messages){
+    const errorDis= document.querySelector(".error");
+    errorDis.innerText = messages;
+    errorDis.style.color = 'red';
+}
+
+async function formValidation(){
+    const nameValue = userName.value.trim();
+    const emailValue = userEmail.value.trim();
+    const pinValue = pin.value.trim();
+
+try {
+    const response = await fetch('https://my-bland.cyclic.app/user/adminsignup',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: nameValue,
+            email: emailValue,
+            password: pinValue
+        })
+    })
+    const res = await response.json();
+    
+    if(res.name == nameValue){
+        //popup complite message
+        modal.style.display = "block";
+        document.getElementById("popupMsg").innerHTML = 'Complite Signup';
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+            location.reload();
+        }
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            location.reload();
+            }
+        }
+        console.log(res)
+    }else{
+        setError(res)
+    }
+    
+} catch (error) {
+// console.log(error)
+    setError(error)
+}
+}

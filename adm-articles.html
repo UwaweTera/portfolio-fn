@@ -40,9 +40,8 @@
                                 <li>
                                     <a href="admin.html">Home</a>
                                     <a href="adm-articles.html">Articles</a>
-                                    <a href="comment.html">Comments</a>
                                     <a href="user-msg.html">User Message</a>
-                                    <a href="#">User Leave</a>
+                                    <a href="adminSignup.html">Admin Signup</a>
                                 </li>
                             </ul>
                         </div>
@@ -51,7 +50,7 @@
                </div>
                
                
-               <a href="login.html" class="logout">login</a>
+               <a href="#" class="logout">logout</a>
 
             </div>
                 
@@ -91,11 +90,9 @@
 				</div>
                 <div class="user">
                     <div class="user-img">
-                        <img src="imgs/test-user-img.jpg" alt="">
+                        <img src="imgs/user.png" alt="">
                     </div>
-                    <div class="user-name">
-                        John Doe
-                    </div>
+                    <div class="user-name" id="adminName"></div>
                 </div>
            </div>
            <div class="body">
@@ -105,27 +102,28 @@
                 
                 <h2>add new article</h2>
                 <div class="form">
-                    <form method="post" id="adm_form">
+                    <form method="post" id="addBlogs">
+                        <div class="error"></div>
                         <div class="input-control">
 							<label for="title">Article title</label>
 							<input type="text" name="title" placeholder="Enter title" id="title"><br>
-							<div class="error"></div>
+							<!-- <div class="error"></div> -->
 						</div>
 
                         <div class="input-control">
 							<label for="img">Article images</label>
-                             <input type="file" name="img" id="img"><br>
-							<div class="error"></div>
+                             <input type="file" name="img" id="image"><br>
+							<!-- <div class="error"></div> -->
 						</div>
 
                         <div class="input-control">
                             <label for="content">Article Description</label>
                             <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
-							<div class="error"></div>
+							<!-- <div class="error"></div> -->
 						</div>
                        
                         <br>
-                        <input type="submit" value="add new">
+                        <input type="submit" id="addBlogBtn">
                     </form>
                 </div>
 
@@ -138,6 +136,7 @@
                                 <th>No</th>
                                 <th>Article Title</th>
                                 <th>Article content</th>
+                                <th>Comments</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>

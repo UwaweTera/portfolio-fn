@@ -1,5 +1,38 @@
+// Gloabal variables and functions
 
+//get token and set to header
+const userToken = localStorage.getItem('userToken');
+const header = new Headers();
+header.append('Content-Type', 'application/json');
+header.append('Authorization', `Bearer ${userToken}`)
 
+//Getting all database blogs
+const getBlogs = async()=>{
+    const response = await fetch('https://my-bland.cyclic.app/blogs');
+    const blogs =  await response.json();
+    return blogs
+}
+
+//popup message error
+ const popup = (msg)=>{
+    //Model section
+    let modal = document.getElementById("myModal");
+    let closeBtn = document.getElementById("myBtn");
+    //popup part
+    modal.style.display = "block";
+    document.getElementById("popupMsg").innerHTML = msg
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        location.reload();
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        location.reload();
+        }
+    } 
+ }
+ //menu bar
 var menu = document.getElementById("menu");
 if(menu){
     menu.addEventListener("click",function(){
@@ -19,13 +52,30 @@ if(menu){
     
 }
 
-//Model section
-let modal = document.getElementById("myModal");
-let closeBtn = document.getElementById("myBtn");
+//display user account box in navigation header
+const userImg = document.getElementById('userImg');
+const accountBox = document.getElementById('accountBlock');
+if (userImg) {
+    userImg.addEventListener('click', ()=>{
+        const accountBox = document.getElementById('accountBlock');
+        accountBox.classList.toggle('show');
+    })
+}
+
+//experience
+const d = new Date();
+const year = d.getFullYear();
+const month = d.getMonth() + 1;
+const day = d.getDate();
+
+const experience = document.getElementById('experience')
+if (experience) {
+    experience.innerHTML = year - 2019;
+}
 
 
 
-//form validation
+//contact form validation
 let userName = document.getElementById("name");
 let userEmail = document.getElementById("email");
 let msg = document.getElementById("msg");
@@ -40,108 +90,48 @@ if(form){
     });   
 }
 
-function setError(elm,messages){
-    let input = elm.parentElement;
-    const errorDis= input.querySelector(".error");
+function setError(messages){
+    const errorDis= document.querySelector(".error");
     errorDis.innerText = messages;
-    input.classList.add('error');
-    input.classList.remove('success');
+    errorDis.style.color = 'red';
 }
 
-function success(element){
-    let input = element.parentElement;
-    const successDis= input.querySelector(".error");
-
-    successDis.innerText = '';
-    input.classList.add('success');
-    input.classList.remove('error');
-}
-
-const isValidEmail = (email)=>{
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-}
-
-function formValidation(){
+async function formValidation(){
     const nameValue = userName.value.trim();
     const emailValue = userEmail.value.trim();
     const textValue = msg.value.trim();
 
-    let count = 0;
-
-    let checkNum = /[0-9]/g;
-    if(nameValue === ""){
-        setError(userName,"name is required");
-    }else if(nameValue.length < 3){
-        setError(userName,"name should be between 3 to 20 characters long");
-    }else if(nameValue.length > 30){
-        setError(userName,"Your name is long");
-    }else if(nameValue.match(checkNum)){
-        setError(userName,"numbers not allowed");
-
+try {
+    const response = await fetch('https://my-bland.cyclic.app/messages',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: nameValue,
+            email: emailValue,
+            message: textValue
+        })
+    })
+    const res = await response.json();
+    
+    if(res == 'message received'){
+        const successMsg = "Message received";
+        popup(successMsg)
     }else{
-        success(userName);
-        count ++;
+        setError(res)
     }
-
-    if(emailValue === ""){
-        setError(userEmail,"email is required");
-    }else if(!isValidEmail(emailValue)){
-        setError(userEmail,"Enter valid email");
-        
-    }else{
-        success(userEmail);
-        count ++;
-    }
-
-    if(textValue === ""){
-        setError(msg,"message is required");
-    }else if(textValue.length < 10){
-        setError(msg,"Explain message briefly, at least 10 characters");
-
-    }else{
-        success(msg);
-        count ++;
-    }
-
-
-    if(nameValue && emailValue && textValue){
-       if(count == 3){
-            function contact(){
-                let contactData = JSON.parse(localStorage.getItem('contactData')) || [];
-                contactData.push({
-                    name: nameValue,
-                    email: emailValue,
-                    message: textValue
-                });
-                localStorage.setItem("contactData",JSON.stringify(contactData));
-
-                //popup part
-                modal.style.display = "block";
-                document.getElementById("popupMsg").innerHTML = "Message received";
-                closeBtn.onclick = function() {
-                    modal.style.display = "none";
-                    location.reload();
-                }
-                  window.onclick = function(event) {
-                    if (event.target == modal) {
-                      modal.style.display = "none";
-                      location.reload();
-                    }
-                  }
-            }
-            contact(); 
-       }
-        
-
-      
-    }
+    
+} catch (error) {
+// console.log(error)
+    setError(error)
+}
 }
 
 
 
 
-//login validation
+//login form validation
 
 let name = document.getElementById("userName");
 let pin  = document.getElementById("pin");
@@ -154,46 +144,42 @@ if(login_form){
     });
 }
 
-function setLogError(elm,msg){
-    let input_control = elm.parentElement;
-    let inputError = input_control.querySelector(".error");
-    inputError.innerText = msg;
-    input_control.classList.add("error");
-    input_control.classList.remove("success");
-}
-function successLog(elm){
-    let input_control = elm.parentElement;
-    let inputSuccess = input_control.querySelector(".error");
-    inputSuccess.innerText = '';
-    input_control.classList.add("success");
-    input_control.classList.remove("error");
-   
-    
-   
-}
-
-function login_validate(){
+async function login_validate(){
     let userValue = name.value.trim();
     let pinValue = pin.value.trim();
 
-    if(userValue == ''){
-        setLogError(name,"userName required");
-    }else if(userValue != 'terah'){
-        setLogError(name," Wrong Username");
-    }else{
-        successLog(name);
-    }
-
-    if(pinValue == ''){
-        setLogError(pin,"Password required");
-    }else if(pinValue != 'terah'){
-        setLogError(pin,"Wrong Password");
-    }else{
-        successLog(pin);
-    }
-
-    if (userValue == 'terah' && pinValue == 'terah') {
-        location.href = "admin.html";
+    try {
+        const response = await fetch('https://my-bland.cyclic.app/user/login',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: userValue,
+                password: pinValue
+            })
+        })
+        const res = await response.json();
+        console.log(res)
+        if(res){
+            if (res.role == 'Guest') {
+                const userToken = res.token;
+                localStorage.setItem('userToken', userToken);
+                const successMsg = 'Now You can add comment and likes';
+                popup(successMsg)
+            }else{
+                const userData = {
+                    name: res.name,
+                    token: res.token
+                }
+                localStorage.setItem('token', JSON.stringify(userData));
+                location.href = "admin.html";
+            }
+            
+        }
+        
+    } catch (error) {
+        setError('Wrong input email or password')
     }
 }
 
@@ -268,141 +254,63 @@ function subValidation(){
 
 
 
-
-
-
-
-
-
-
-
-    //validation to comment btn 
-const commForm = document.getElementById("contact-form");
+//validation to comment form
+const commForm = document.getElementById("comment-form");
 
 let CommName = document.querySelector(".commName");
 let CommEmail = document.querySelector(".commEmail");
 let CommMsg = document.querySelector(".commMsg");
 if(commForm){
-    commForm.addEventListener("submit",function(e){
+    commForm.addEventListener("submit",async(e)=>{
         e.preventDefault();
-
-        function setError(elm,messages){
-            let input = elm.parentElement;
-            const errorDis= input.querySelector(".error");
-            errorDis.innerText = messages;
-            input.classList.add('error');
-            input.classList.remove('success');
+        
+        function setCommError(messages){
+            const errorDis= document.querySelector("#commErr");
+            errorDis.innerHTML = messages;
+            errorDis.style.color = 'red';
         }
-        
-        function success(element){
-            let input = element.parentElement;
-            const successDis= input.querySelector(".error");
-        
-            successDis.innerText = '';
-            input.classList.add('success');
-            input.classList.remove('error');
+        if(userToken === null){
+            const coreMsg = 'login before commenting'
+            popup(coreMsg)
         }
-        
-        const isValidEmail = (email)=>{
-            const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
+        const textValue = CommMsg.value.trim();
+        try {
+            let blogId = location.href.split('=')[1];
+            const response = await fetch(`https://my-bland.cyclic.app/blogs/${blogId}/comment`,{
+                method: 'POST',
+                headers: header,
+                body: JSON.stringify({
+                    comment: textValue
+                })
+            });
+            const res =  await response.json();
+            if (res.comment == textValue) {
+                const successMsg = "Complite to commenting";
+                popup(successMsg) 
+            }else{
+                setCommError(res)
+            }
+        } catch (error) {
+            console.log(error)
         }
-        commentValidation()
-        function commentValidation(){
-            const nameValue = CommName.value.trim();
-            const emailValue = CommEmail.value.trim();
-            const textValue = CommMsg.value.trim();
-        
-            let count = 0;
-            let checkNum = /[0-9]/g;
-            if(nameValue === ""){
-                setError(CommName,"name is required");
-            }else if(nameValue.length < 3){
-                setError(CommName,"name should be between 3 to 20 characters long");
-            }else if(nameValue.length > 30){
-                setError(CommName,"Your name is long");
-            }else if(nameValue.match(checkNum)){
-                setError(CommName,"numbers not allowed");
-        
-            }else{
-                success(CommName);
-                count++;
-            }
-        
-            if(emailValue === ""){
-                setError(CommEmail,"email is required");
-            }else if(!isValidEmail(emailValue)){
-                setError(CommEmail,"Enter valid email");
-                
-            }else{
-                success(CommEmail);
-                count++;
-            }
-        
-            if(textValue === ""){
-                setError(CommMsg,"message is required");
-            }else if(textValue.length < 10){
-                setError(CommMsg,"Explain message briefly, at least 10 characters");
-        
-            }else{
-                success(CommMsg);
-                count++;
-            }
-        
-        
-            if(nameValue && emailValue && textValue){
-
-                if (count == 3) {
-                    let articleId = location.href.split('=')[1];
-                    function comments(){
-                        let commentData = JSON.parse(localStorage.getItem('commentData')) || [];
-                        commentData.push({
-                            artId: articleId,
-                            name: nameValue,
-                            email: emailValue,
-                            message: textValue
-                        });
             
-                        localStorage.setItem("commentData",JSON.stringify(commentData));
-                        //commForm.reset();
-                        //popup part
-                        modal.style.display = "block";
-                        document.getElementById("popupMsg").innerHTML = "Complite to commenting";
-                        closeBtn.onclick = function() {
-                            modal.style.display = "none";
-                            location.reload();
-                        }
-                        window.onclick = function(event) {
-                            if (event.target == modal) {
-                            modal.style.display = "none";
-                            location.reload();
-                            }
-                        }   
-                    }
-                    comments();
-                    countComment();
-                    commentDisplay();
-                }
-                
-              
-            }
-        }
     });   
 }
 
 
 //display comment
-function commentDisplay(){
+async function commentDisplay(){
     const cont = document.querySelector(".comment-container");
     if (cont) {
-        let articleId = location.href.split('=')[1];
-    if (localStorage.getItem(("commentData"))) {
-        let location = JSON.parse(localStorage.getItem("commentData"));
-        
+        let blogId = location.href.split("=")[1];
+        const response = await fetch(`https://my-bland.cyclic.app/blogs/${blogId}`);
+        const currentBlog =  await response.json();
+    if (currentBlog) {
+            const allComments = currentBlog.comments;
             cont.innerHTML = "";
-            location.forEach((data) => {
-                if(data.artId == articleId){
-                    cont.innerHTML += `
+            for (let index =  allComments.length -1; index >= 0; index--) {
+                const data = allComments[index];
+                cont.innerHTML += `
                     <div class="user-comm">
                             
                         <div class="row">
@@ -411,21 +319,19 @@ function commentDisplay(){
                             </div>
                             <div class="col-content">
                                 <div class="head">
-                                    <p class="time">LAST UPDATED ON: AUGUST 20, 2020</p>
+                                    <p class="time">LAST UPDATED ON: ${data.date}</p>
                                 </div>
                                 <div class="body">
                                     <h2>${data.name}</h2>
                                 </div>
                                 <div class="comm-footer">
-                                <p>${data.message} </p>
+                                <p>${data.comment} </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    `;
-                }
-
-            }); 
+                `;
+            }
         }else{
             cont.innerHTML = "0 blog";
         }
@@ -438,101 +344,69 @@ commentDisplay();
 
 //count comment 
 
-function countComment(){
-    let getComment = JSON.parse(localStorage.getItem("commentData"));
+async function countComment(){
+    let blog_id = location.href.split("=")[1];
+    const response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}`);
+    const currentBlog =  await response.json();
+
     let commElement = document.querySelectorAll("#commLength");
-    let commLength = 0;
-    let articleId = location.href.split('=')[1];
-    if (getComment) {
-        getComment.forEach(data=>{
-            if (data.artId ==  articleId) {
-                commLength++
-            }
-            
-        });
-        for (let i = 0; i < commElement.length; i++) {
-            const elm = commElement[i];
-            elm.innerHTML += commLength
-        }
-    }else{
-        for (let i = 0; i < commElement.length; i++) {
-            const elm = commElement[i];
-            elm.innerHTML = 0;
-        }
+    //get all element have commLength id adding comment length
+    for (let i = 0; i < commElement.length; i++) {
+        const elm = commElement[i];
+        elm.innerHTML += currentBlog.comments.length
     }
-    
 }
 countComment();
 
-
-//adding like
+// Like staff
 const like = document.getElementById("like");
 let likeQty = document.getElementById("likeQty");
+let like_blog_id = location.href.split('=')[1];
 if (like) {
-    let articleId = location.href.split('=')[1];
-    
-    like.addEventListener("click",function(){
-        this.classList.toggle("liking");
-       
-        if (this.classList.contains("liking")) {
-            likeQty.value = parseInt(likeQty.value) + 1;  
-            likeQtyVal = likeQty.value;
-            let data = {
-                articleId: articleId,
-                likeCount : likeQtyVal
-            }
-            let locLike = getLike() || [];
-            locLike.push(data);
-            sendLike(locLike);
-        }else{
-            
-            likeQty.value = parseInt(likeQty.value) - 1;  
-            let locLike = getLike();
-            if (locLike) {
-                locLike.pop();
-                sendLike(locLike);
-            }
+    like.addEventListener("click",async()=>{
+        if(userToken === null){
+            const coreMsg = 'login before liking'
+            popup(coreMsg)
         }
-    });
-    //get like local storage  data
-    function getLike(){
-        let locLike = JSON.parse(localStorage.getItem('likes'));
-        return locLike;
-    }
-    //send like local storage  data
-    function sendLike(data){
-        localStorage.setItem('likes',JSON.stringify(data));
-    }
-    
-    let likeDisplay = ()=>{
-        let articleId = location.href.split('=')[1];
-        const likeLoc = getLike();
-        let count = 0;
-        if (likeLoc) {
-            likeLoc.forEach((data,index)=>{
-                if (data.articleId  == articleId) {
-                    count++;
-                }
-            })
-        
-            likeQty.value = count;
+        // this.classList.toggle("liking");
+        const response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/like`,{
+                method: 'PUT',
+                headers: header
+            });
+            const res =  await response.json(); 
             
-        }else{
-            likeQty.value = 0;
-        }
-    }
-    likeDisplay();
+            if(res == 'liked'){
+                like.classList.add('liking')
+                countLike()
+            }else{
+                like.classList.remove('liking')
+                countLike()
+            }
+    })
 }
+//count like
+const countLike = async()=>{
+    let response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/likes`);
+    let res = await response.json();
+    
+    if (blog_id) {
+        if (res > 0) {
+            likeQty.innerHTML = res;
+            like.classList.add('liking')
+        }
+        likeQty.innerHTML = res;
+    }
+}
+countLike()
 
 
+    // Display all blogs in one page file(blogs)
 
-    // blog detail
-
-    function art_detailDisplay(){
+    async function art_detailDisplay(){
         const cont = document.querySelector(".loc_blog");
-
-        if (localStorage.getItem(("articleData"))) {
-            let loc = JSON.parse(localStorage.getItem("articleData"));
+       
+        const blogs =  await getBlogs();
+        if (blogs.length > 0) {
             const cutStr = (val,size)=>{
                 let newString = val.split(" ");
                 let newArr = newString.slice(0, size);
@@ -544,28 +418,29 @@ if (like) {
             }
             if (cont) {
                 cont.innerHTML = "";
-                loc.forEach((data,index) => {
+                for (let index = blogs.length -1; index >=0 ; index--) {
+                    const data = blogs[index];
                     cont.innerHTML += `
                     <div class="art-item">
                         <div class="row">
                             <div class="col-img">
-                                <img src="${data.image}" alt="">
+                                <img src="${data.image.url}" alt="">
                             </div>
                             <div class="col-content">
                                 <div class="head">
                                     <h1 id='detail'>${data.head}</h1>
                                 </div>
                                 <div class="body">
-                                    <p >${cutStr(data.data,13)}...</p>
+                                    <p >${cutStr(data.body,13)}...</p>
                                 </div>
                                 <div class="art-footer">
-                                    <a href="blog-2.html?id=${index}" id='viewMore'>view more</a>
+                                    <a href="blog-2.html?id=${data._id}" id='viewMore'>view more</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     `;
-                }); 
+                }
             }
             
 
@@ -577,32 +452,34 @@ if (like) {
     art_detailDisplay(); 
 
 
-// display elements
+// display blog by id mean one blog instead of all blog
 
 let blog_id = location.href.split("=")[1];
 
-
-//display blogs
-function blogDisplay(){
+//display blogs description based on id in file(blog-2)
+async function blogDisplay(){
     const cont = document.querySelector("#blog_display");
-    cont.innerHTML  = "one";
+    // cont.innerHTML  = "one";
+    const blogs =  await getBlogs();
     if (cont) {
-    if (localStorage.getItem(("articleData"))) {
-        let location = JSON.parse(localStorage.getItem("articleData"))[blog_id];
+    if (blogs.length > 0 ) {
+        // let location = JSON.parse(localStorage.getItem("articleData"))[blog_id];
+        let response2 = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}`);
+        let blog = await response2.json()
             cont.innerHTML = "";
                 cont.innerHTML = `
                 <div class="head">
-                    <h1>${location.head}</h1>
-                    <p> UPDATED ON: AUGUST 30, 2022
+                    <h1>${blog.head}</h1>
+                    <p> UPDATED ON: ${blog.date}
                     </p>
                 </div>
 
                 <div class="body">
                     <div class="body-img">
-                        <img src="${location.image}" alt="">
+                        <img src="${blog.image.url}" alt="">
                     </div>
                     <div class="body-content">
-                       ${location.data}
+                       ${blog.body}
                     </div>
                 </div>
                 `;
@@ -615,3 +492,105 @@ function blogDisplay(){
 }
 blogDisplay(); 
 
+
+    // display recent blogs
+
+    async function recentBlogs(){
+        const cont = document.querySelector("#recentBlog");
+       
+        const blogs =  await getBlogs();
+        if (blogs.length > 0) {
+            const cutStr = (val,size)=>{
+                let newString = val.split(" ");
+                let newArr = newString.slice(0, size);
+                let txt = ""
+                newArr.forEach((data)=>{
+                  txt += data + " "
+                })
+                return txt;
+            }
+            if (cont) {
+                cont.innerHTML = "";
+                const newArr = blogs.slice(-3).reverse();
+                for (let index = 0; index < newArr.length; index++) {
+                    const data = newArr[index];
+                    cont.innerHTML += `
+                    <div class="blog_col">
+                        <a href= "blog-2.html?id=${data._id}">
+                            <div class="blogImg">
+                                <img src="${data.image.url}" alt="">
+                            </div>
+                            <div class="blogHead">
+                                
+                                    <h3>${data.head}</h3>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    `;
+                }
+            }
+            
+
+            
+        }else{
+            cont.innerHTML = "0 blog";
+        }
+    }
+    recentBlogs(); 
+
+//user signup
+
+//contact form validation
+let userSignName = document.getElementById("name");
+let userSignEmail = document.getElementById("email");
+let userSignpin = document.getElementById("pin");
+let userForm = document.getElementById("user_signup_form");
+
+
+if(userForm){
+    userForm.addEventListener("submit",function(e){
+        e.preventDefault();
+        userSignValidation();
+    });   
+}
+
+function setError(messages){
+    const errorDis= document.querySelector(".error");
+    errorDis.innerText = messages;
+    errorDis.style.color = 'red';
+}
+
+async function userSignValidation(){
+    const nameValue = userSignName.value.trim();
+    const emailValue = userSignEmail.value.trim();
+    const pinValue = userSignpin.value.trim();
+
+try {
+    const response = await fetch('https://my-bland.cyclic.app/user/signup',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: nameValue,
+            email: emailValue,
+            password: pinValue
+        })
+    })
+    const res = await response.json();
+    
+    if(res == 'Complite Signup' ){
+        // //popup complite message
+        // let successMsg = res;
+        // popup(successMsg)
+        window.location.href = 'login.html'
+    }else{
+        setError(res)
+    }
+    
+} catch (error) {
+// console.log(error)
+    setError(error)
+}
+}

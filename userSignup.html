@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contact</title>
+    <title>login</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
 	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 	<!--   font links   -->
@@ -61,7 +61,6 @@
 						</div>
 					</li>
 				</ul>
-			
 				
 			</div>
 			<div class="menu" id="menu">
@@ -72,77 +71,61 @@
 	</nav>
 
 
-	<!-- popup -->
-	<div id="myModal" class="modal">
+		<!-- popup -->
+		<div id="myModal" class="modal">
 
-		<div class="modal-content">
-		<p id="popupMsg"></p>
-		<button id="myBtn">ok</button>
+			<div class="modal-content">
+			<p id="popupMsg"></p>
+			<button id="myBtn">ok</button>
+			</div>
+		
 		</div>
-	
-	</div>
+
+        <!--            main indicater      -->
+        <div class="main">
+            <div class="container">
+                <h1>Signup</h1>
+            </div>
+        </div>
+
 
 
     <!--                form section             -->
 
 
-    <div class="contact">
+    <div class="login">
         <div class="container">
-            <div class="head">
-                <h1>contact me</h1>
-                <h2>let know what you need for us</h2>
-            </div>
+            <!-- <div class="head">
+                <h1>admin login</h1>
+                <h2>admin dashboard for controling website</h2>
+            </div> -->
             <div class="row">
                 <div class="info">
-                    <div class="row-info">
-                        <div class="img">
-                            <i class="las la-map-marker-alt"></i>
-                        </div>
-                        <div class="text">
-                            <p>Address</p>
-                            <p>Kigali, Gasabo, Jabana and Gisozi</p>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div class="img">
-                            <i class="las la-envelope"></i>
-                        </div>
-                        <div class="text">
-                            <p>Gmail</p>
-                            <p>uwaweteraviv@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="row-info">
-                        <div class="img">
-                            <i class="las la-phone-volume"></i>
-                        </div>
-                        <div class="text">
-                            <p>Phone</p>
-                            <p>+250 735 462 562</p>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="form">
-                    <form method="post" id="form">
-						<div class="error"></div>
-						<div class="input-control">
-							<label for="name">Name</label><br>
-							<input type="text" placeholder="Your name" id="name"><br>
-							<!-- <div class="error"></div> -->
-						</div>
-                       <div class="input-control">
-							<label for="email">Your Email</label><br>
-							<input type="text" placeholder="Your Email" id="email"><br>
-							<!-- <div class="error"></div> -->
-					   </div>
-                       <div class="input-control">
-							<label for="name">Message</label><br>
-							<textarea name="" cols="30" rows="10" placeholder="type the message..." id="msg"></textarea>
-							<!-- <div class="error"></div> -->
-					   </div>
-
-						<input type="submit" value="SUBMIT">
-					</form>
+                    <h1>User Signup</h1>
+                    <div class="form userSignup">
+                        <form method="POST" id="user_signup_form" action="userSignup.html">
+                            <div class="error"></div>
+                            <div class="input-control">
+                                <label for="name">Enter Name</label><br>
+                                <input type="text" placeholder="Your name" id="name"><br>
+                            </div>
+                           <div class="input-control">
+                                <label for="email">Enter Email</label><br>
+                                <input type="text" placeholder="Your Email" id="email"><br>
+                           </div>
+                           <div class="input-control">
+                                <label for="password">Enter Password</label><br>
+                                <input type="password" placeholder="Enter Passord" id="pin"><br>
+                           </div>
+    
+                            <input type="submit" value="SUBMIT" class="signupBtn"><br>
+                            
+                        </form>
+                        <a href="login.html">Have account login</a>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -245,7 +228,7 @@
 						<h1>join our website</h1>
 						<p>there is no cost to join our website</p>
 						<form action="" id="sub_form">
-							<div class="input-control">		
+							<div class="input-control">
 								<input type="text" placeholder="Enter Email" id="sub-email">
 								<input type="submit" value="SUBMIT">
 								<div class="error"></div>
@@ -259,7 +242,8 @@
 	</section>
 
 
+
 	<script src="tinymce/js/tinymce/tinymce.min.js"></script>
-	<script src="js/custom.js"></script>
+	<script  src="js/custom.js" ></script>
 </body>
 </html>
