@@ -269,7 +269,7 @@ if(commForm){
             errorDis.innerHTML = messages;
             errorDis.style.color = 'red';
         }
-        if(userToken === null){
+            if(userToken === null){
             const coreMsg = 'login before commenting'
             popup(coreMsg)
         }
@@ -291,7 +291,10 @@ if(commForm){
                 setCommError(res)
             }
         } catch (error) {
-            console.log(error)
+            if (localStorage.getItem('userToken')) {
+                localStorage.removeItem('userToken');
+                location.reload()  
+            }
         }
             
     });   
@@ -368,8 +371,8 @@ if (like) {
             const coreMsg = 'login before liking'
             popup(coreMsg)
         }
-        // this.classList.toggle("liking");
-        const response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/like`,{
+        try {
+            const response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/like`,{
                 method: 'PUT',
                 headers: header
             });
@@ -378,10 +381,18 @@ if (like) {
             if(res == 'liked'){
                 like.classList.add('liking')
                 countLike()
-            }else{
+            }else if(res == 'like removed'){
                 like.classList.remove('liking')
                 countLike()
             }
+        } catch (error) {
+            if (localStorage.getItem('userToken')) {
+                localStorage.removeItem('userToken');
+                location.reload()  
+            }
+            
+        }
+        
     })
 }
 //count like

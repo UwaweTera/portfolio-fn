@@ -288,8 +288,10 @@ async function userCount(){
                 headers: header
     });
     const users =  await response.json();
-    let userElm = document.getElementById("userNum")
-    userElm.innerHTML = users.length
+    let userElm = document.getElementById("userNum");
+    if (userElm) {
+        userElm.innerHTML = users.length
+    }
 }
 userCount();
 
@@ -299,8 +301,11 @@ userCount();
 async function artCount(){
     const response = await fetch('https://my-bland.cyclic.app/blogs');
     const blogs =  await response.json();
-    let blogElm = document.getElementById("artNum")
-    blogElm.innerHTML = blogs.length
+    let blogElm = document.getElementById("artNum");
+    if (blogElm) {
+        
+        blogElm.innerHTML = blogs.length
+    }
 }
 artCount();
 
