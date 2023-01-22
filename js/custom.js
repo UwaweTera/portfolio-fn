@@ -20,7 +20,7 @@ const getBlogs = async()=>{
     let closeBtn = document.getElementById("myBtn");
     //popup part
     modal.style.display = "block";
-    document.getElementById("popupMsg").innerHTML = msg
+    document.getElementById("popupMsg").innerHTML = msg;
     closeBtn.onclick = function() {
         modal.style.display = "none";
         location.reload();
@@ -100,7 +100,8 @@ async function formValidation(){
     const nameValue = userName.value.trim();
     const emailValue = userEmail.value.trim();
     const textValue = msg.value.trim();
-
+    const click_loader = document.querySelector('.click_loader');
+    click_loader.className += " show";
 try {
     const response = await fetch('https://my-bland.cyclic.app/messages',{
         method: 'POST',
@@ -116,9 +117,11 @@ try {
     const res = await response.json();
     
     if(res == 'message received'){
+        click_loader.className += " hide";
         const successMsg = "Message received";
         popup(successMsg)
     }else{
+        click_loader.className += " hide";  
         setError(res)
     }
     
@@ -415,50 +418,56 @@ countLike()
 
     async function art_detailDisplay(){
         const cont = document.querySelector(".loc_blog");
-       
+        const loader = document.querySelector('.loader');
         const blogs =  await getBlogs();
-        if (blogs.length > 0) {
-            const cutStr = (val,size)=>{
-                let newString = val.split(" ");
-                let newArr = newString.slice(0, size);
-                let txt = ""
-                newArr.forEach((data)=>{
-                  txt += data + " "
-                })
-                return txt;
+        if (blogs) {
+            if(loader){
+                loader.style.display = 'none';
             }
-            if (cont) {
-                cont.innerHTML = "";
-                for (let index = blogs.length -1; index >=0 ; index--) {
-                    const data = blogs[index];
-                    cont.innerHTML += `
-                    <div class="art-item">
-                        <div class="row">
-                            <div class="col-img">
-                                <img src="${data.image.url}" alt="">
-                            </div>
-                            <div class="col-content">
-                                <div class="head">
-                                    <h1 id='detail'>${data.head}</h1>
+            if (blogs.length > 0) {
+                const cutStr = (val,size)=>{
+                    let newString = val.split(" ");
+                    let newArr = newString.slice(0, size);
+                    let txt = ""
+                    newArr.forEach((data)=>{
+                      txt += data + " "
+                    })
+                    return txt;
+                }
+                if (cont) {
+                    cont.innerHTML = "";
+                    for (let index = blogs.length -1; index >=0 ; index--) {
+                        const data = blogs[index];
+                        cont.innerHTML += `
+                        <div class="art-item">
+                            <div class="row">
+                                <div class="col-img">
+                                    <img src="${data.image.url}" alt="">
                                 </div>
-                                <div class="body">
-                                    <p >${cutStr(data.body,13)}...</p>
-                                </div>
-                                <div class="art-footer">
-                                    <a href="blog-2.html?id=${data._id}" id='viewMore'>view more</a>
+                                <div class="col-content">
+                                    <div class="head">
+                                        <h1 id='detail'>${data.head}</h1>
+                                    </div>
+                                    <div class="body">
+                                        <p >${cutStr(data.body,13)}...</p>
+                                    </div>
+                                    <div class="art-footer">
+                                        <a href="blog-2.html?id=${data._id}" id='viewMore'>view more</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    `;
+                        `;
+                    }
                 }
+                
+    
+                
+            }else{
+                cont.innerHTML = "0 blog";
             }
-            
-
-            
-        }else{
-            cont.innerHTML = "0 blog";
         }
+        
     }
     art_detailDisplay(); 
 
@@ -591,7 +600,7 @@ try {
     })
     const res = await response.json();
     
-    if(res == 'Complite Signup' ){
+    if(res.name == nameValue){
         // //popup complite message
         // let successMsg = res;
         // popup(successMsg)
