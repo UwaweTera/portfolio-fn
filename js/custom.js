@@ -74,11 +74,6 @@ if (experience) {
     experience.innerHTML = year - 2019;
 }
 
-const experience = document.getElementById('experience')
-if (experience) {
-    experience.innerHTML = year - 2019;
-}
-
 
 //contact form validation
 let userName = document.getElementById("name");
@@ -303,8 +298,6 @@ if(commForm){
                 localStorage.removeItem('userToken');
                 location.reload()  
             }
-        } catch (error) {
-            console.log(error)
         }
             
     });   

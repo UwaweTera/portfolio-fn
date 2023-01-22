@@ -273,7 +273,9 @@ body {
 }
 .header .head-content .head-btn {
   display: flex;
+  flex-direction: row;
   margin: 30px 0;
+  flex-wrap: wrap;
 }
 .header .head-content .head-btn .btn1 a {
   background-color: #008CBA;
@@ -297,12 +299,16 @@ body {
   border-radius: 80px;
   font-size: 20px;
   font-weight: 600;
-  margin: 30px 60px;
   border: 2px solid #008CBA;
   text-decoration: none;
 }
 .header .head-content .head-btn .btn1 a:hover {
   background-color: #076483;
+}
+@media screen and (max-width: 350px) {
+  .header .head-content .btn2 {
+    margin-top: 30px;
+  }
 }
 @media screen and (max-width: 800px) {
   .header .head-content {

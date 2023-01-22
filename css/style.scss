@@ -358,8 +358,9 @@ body{
         }
         .head-btn{
             display: flex;
-
+            flex-direction: row;
             margin: 30px 0;
+            flex-wrap: wrap;
             .btn1 a{
                 @include btn;
                 margin: 0px 0;
@@ -368,10 +369,10 @@ body{
             .btn1 a:hover{
                 background-color: #076483;
             }
-
+            
             .btn2 a{
                 @include btn2;
-                margin: 30px 60px;
+                // margin: 30px 10px;
                 border: 2px solid $lightBlue;
                 text-decoration: none;
             }
@@ -380,10 +381,14 @@ body{
             }
         }
 
-        
+        @media screen and (max-width: 350px){
+            .btn2{
+                margin-top: 30px
+            }
+        }
     }
     //responsive to head section
-@media screen  and (max-width: 800px){
+@media screen and (max-width: 800px){
     .head-content{
         width: 90%;
         top: 50%;
