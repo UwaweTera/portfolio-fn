@@ -1941,6 +1941,7 @@ body{
                     text-align: center;
                 }
                 form{
+                    width: 95%;
                     margin: 30px;
                     input[type='text'],input[type='password']{
                         width: 100%;
@@ -1989,24 +1990,24 @@ body{
                         }
                     }
                 }
+                
+            }
+            @media screen and (max-width: 800px){
+                .form{
+                    width: 100%;
+                }
             }
         }   
-        
+        @media screen and (max-width: 900px){
+            .row{
+                width: 100%;
+            }
+        }
     }
     @media screen and (max-width: 900px){
         input[type='text'],input[type='password']{
             font-size: 16px;
         }
-    }
-    @media screen and (min-width: 900px){
-        
-            .info{
-                width: 50%;
-            }
-            .form{
-                width: 50%;
-            }
-    
     }
 }
 
