@@ -45,9 +45,6 @@ const popup = (msg)=>{
     }
  }
  adminName()
-
-
-
 //menu bar
 var menu = document.getElementById("adm-icon");
 menu.addEventListener("click",function(){
@@ -138,6 +135,7 @@ function success(element){
                             popup(successMsg)
                         }else{
                             click_loader.className += " hide";
+
                             setError(res)
                         }
 
@@ -171,6 +169,7 @@ function success(element){
                             popup(successMsg);
                         }else{
                             setError(res);
+
                         }
 
                     })
@@ -240,6 +239,7 @@ function success(element){
     
         async function blogDelete(id){
             click_loader.className += " show";
+
             try {
                 const response = await fetch(`https://my-bland.cyclic.app/blogs/${id}`,{
                     method: 'DELETE',
@@ -298,6 +298,7 @@ async function userCount(){
     } catch (error) {
         console.log(error);
     }
+
 }
 userCount();
 

@@ -21,6 +21,7 @@ const getBlogs = async()=>{
     //popup part
     modal.style.display = "block";
     document.getElementById("popupMsg").innerHTML = msg;
+
     closeBtn.onclick = function() {
         modal.style.display = "none";
         location.reload();
@@ -73,6 +74,10 @@ if (experience) {
     experience.innerHTML = year - 2019;
 }
 
+const experience = document.getElementById('experience')
+if (experience) {
+    experience.innerHTML = year - 2019;
+}
 
 
 //contact form validation
@@ -298,6 +303,8 @@ if(commForm){
                 localStorage.removeItem('userToken');
                 location.reload()  
             }
+        } catch (error) {
+            console.log(error)
         }
             
     });   
@@ -376,6 +383,7 @@ if (like) {
         }
         try {
             const response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/like`,{
+
                 method: 'PUT',
                 headers: header
             });
@@ -396,6 +404,7 @@ if (like) {
             
         }
         
+
     })
 }
 //count like
