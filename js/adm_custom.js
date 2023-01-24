@@ -499,7 +499,6 @@ try {
             location.reload();
             }
         }
-        console.log(res)
     }else{
         setError(res)
     }

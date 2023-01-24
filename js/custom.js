@@ -40,8 +40,7 @@ if(menu){
     
         let nav = document.getElementById("navbar");
         let icon = document.getElementById("icon-2");
-    
-    
+
         if(nav.className === "links"){
             nav.className += " resp";
             icon.className = "las la-window-close";
@@ -213,7 +212,14 @@ function subSucc(element){
     succBox.innerText = '';
     box_form.classList.add("success");
     box_form.classList.remove("error");
+    popup('Complite Subscribing')
 }
+
+const isValidEmail = (email)=>{
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
 function subValidation(){
     let emailVal = sub_email.value.trim();
     //counting success
@@ -222,14 +228,13 @@ function subValidation(){
     if(emailVal == ""){
         subErr(sub_email,"email required");
     }else if(!isValidEmail(emailVal)){
-        setError(sub_email,"Enter valid email");
-        
+        subErr(sub_email, "Enter valid email");
     }else{
         subSucc(sub_email);
         count++;
     }
 
-    if(emailVal){
+/*     if(emailVal){
         if (count == 1) {
             function sub(){
                 let subData = JSON.parse(localStorage.getItem('subData')) || [];
@@ -252,7 +257,7 @@ function subValidation(){
             }
             sub(); 
         }
-    }
+    } */
 }
 
 
@@ -603,16 +608,12 @@ try {
     const res = await response.json();
     
     if(res.name == nameValue){
-        // //popup complite message
-        // let successMsg = res;
-        // popup(successMsg)
         window.location.href = 'login.html'
     }else{
         setError(res)
     }
     
 } catch (error) {
-// console.log(error)
     setError(error)
 }
 }
