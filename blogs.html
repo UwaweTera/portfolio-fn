@@ -15,204 +15,45 @@
 </head>
 <body>
     
+	<!-- Header Navigation -->
+	<nav class="navbar"></nav>
 
+	<!-- popup -->
+	<div id="myModal" class="modal">
 
-	<nav class="navbar">
-		<div class="cont">
-			<div class="log">
-				<div class="log-img"><img src="imgs/logo.png" alt="log" srcset=""></div>
-				<div class="log-name">Pweb</div>
-			</div>
-			<div class="links" id="navbar">
-				<ul>
-					<li>
-						<a href="index.html">HOME</a>
-					</li>
-					<li>
-						<a href="about.html">ABOUT</a>
-					</li>
-					<li>
-						<a href="skill.html">SKILLS</a>
-					</li>
-					<li>
-						<a href="port.html">PORTFOLIO</a>
-					</li>
-					<li>
-						<a href="blogs.html">BLOGS</a>
-					</li>
-					<li>
-						<a href="contact.html">CONTACT</a>
-					</li>
-					<li>
-						<div class="userAccount">
-							<div class="userImg" id="userImg">
-								<img src="imgs/user.png" alt="">
-							</div>
-							<div class="accountBlock" id="accountBlock">
-								<ul>
-									<li>
-										<a href="userSignup.html">Signup</a>
-									</li>
-									<li>
-										<a href="login.html">Login</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</li>
-				</ul>
-				
-			</div>
-			<div class="menu" id="menu">
-				<i class="las la-bars" id="icon-2"></i>
-			</div>
+		<div class="modal-content">
+		<p id="popupMsg"></p>
+		<button id="myBtn">ok</button>
 		</div>
-		
-	</nav>
-
-		<!-- popup -->
-		<div id="myModal" class="modal">
-
-			<div class="modal-content">
-			<p id="popupMsg"></p>
-			<button id="myBtn">ok</button>
-			</div>
-		
-		</div>
-
-
-
-        <!--            main indicater      -->
-        <div class="main">
-            <div class="container">
-                <h1>Blogs</h1>
-            </div>
-        </div>
-
-
-
-        
-
-
-
+	
+	</div>
+	
     <!--                blog section             -->
-
+	
 	
 	<div class="loader">
 		<img src="imgs/loader.gif" alt="">
 	</div>
-        <div class="articles">
-
-            <div class="container">
-
-				<div class="loc_blog">
-				
-				</div>
-
-            </div>
-            
-        </div>
-        
-
-
-
-
+	<!--            main indicater      -->
+	<div class="main"></div>
+	<div class="articles">
+		<div class="container">
+			<div class="loc_blog">
+			
+			</div>
+		</div>    
+	</div> 
 
 	<!--         footer section             -->
-	<section class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-1">
-					<div class="log">
-						<div class="log-img"><img src="imgs/logo.png" alt="log" srcset=""></div>
-						<div class="log-name">Pweb</div>
-					</div>
-				</div>
-				<div class="col-2">
-					<h1>LINKS</h1>
-					<div class="row-2">
-						<div class="col-1">
-							<ul>
-								<li>
-									<a href="index.html">Home</a>
-								</li>
-								<li>
-									<a href="about.html">About</a>
-								</li>
-								<li>
-									<a href="skill.html">Skills</a>
-								</li>
-								<li>
-									<a href="port.html">Portifolio</a>
-								</li>
-							</ul>
-						</div>
-						<div class="col-2">
-							<ul>
-								<li>
-									<a href="blogs.html">Blogs</a>
-								</li>
-								<li>
-									<a href="contact.html">Contact</a>
-								</li>
-								<li>
-									<a href="login.html">Login</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-3">
-					<h1>contact</h1>
-					<ul>
-						<li>
-							<a href="blogs.html">Email</a>
-						</li>
-						<li>
-							<a href="contact.html">LinkedIn</a>
-						</li>
-						<li>
-							<a href="login.html">Instagram</a>
-						</li>
-						<li>
-							<a href="login.html">facebook</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col-4">
-					<h1>Follow Us</h1>
-					<ul>
-						<li>
-							<a href="https://www.linkedin.com/in/uwawe-terah-90005724a/" target="_blank">
-								<img src="imgs/linked.png" alt="">
-							</a>
-						</li>
-						<li>
-							<a href="https://github.com/UwaweTera" target="_blank">
-								<img src="imgs/github.png" alt="">
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col-5">
-					<div class="box">
-						<h1>join our website</h1>
-						<p>there is no cost to join our website</p>
-						<form action="" id="sub_form">
-
-							<div class="input-control">		
-								<input type="text" placeholder="Enter Email" id="sub-email">
-								<input type="submit" value="SUBMIT">
-								<div class="error"></div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<section class="footer"></section>
 
 
-	<script src="js/custom.js"></script>
+
+
+
+	<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel" src="react/blogs.js"></script>
 </body>
 </html>
