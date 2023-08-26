@@ -1,6 +1,6 @@
 const adminToken = JSON.parse(localStorage.getItem('token'));
 if (adminToken == null) {
-    window.location.replace('login.html');
+    window.location.replace('../login.html');
 }
 
 // main backend url
@@ -443,7 +443,7 @@ artCount();
     const logout = document.querySelector('.logout');
     logout.addEventListener('click',()=>{
         localStorage.removeItem('token');
-        window.location.replace('login.html')
+        window.location.replace('../login.html')
     })
 
 

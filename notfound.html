@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .error-container {
+      text-align: center;
+    }
+
+    .error-code {
+      font-size: 8em;
+      color: #555;
+      margin: 0;
+    }
+
+    .error-message {
+      font-size: 1.5em;
+      color: #777;
+      margin: 10px 0;
+    }
+  </style>
+  <title>404 - Page Not Found</title>
+
+</head>
+<body>
+
+  <div class="error-container">
+    <p class="error-code">404</p>
+    <p class="error-message">Page Not Found</p>
+    <div class="back-home">
+        <a
+          href="index.html"
+          class="bg-blue-500 hover:bg-blue-600 px-4 py-3 text-white rounded font-medium"
+        >
+          <i class="fa-solid fa-house mr-1"></i> Back Home</a
+        >
+      </div>
+  </div>
+
+   <!-- tailwind -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+</body>
+</html>
