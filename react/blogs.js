@@ -4,6 +4,7 @@ function UserAccount(){
 		const accountBox = document.getElementById('accountBlock');
         accountBox.classList.toggle('show');
 	}
+
 	return(
 		<div className="userAccount">
 			<div className="userImg" id="userImg" onClick={viewAccount}>
@@ -118,7 +119,7 @@ class Blogs extends React.Component{
     }
     async componentDidMount(){
         try {
-            const response = await fetch('https://my-bland.cyclic.app/blogs');
+            const response = await fetch('https://terah-portifolio-bn.onrender.com/blogs');
             const blogs = await response.json();
 			if (blogs) {		
 				loader.style.display = 'none';	

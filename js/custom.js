@@ -6,9 +6,13 @@ const header = new Headers();
 header.append('Content-Type', 'application/json');
 header.append('Authorization', `Bearer ${userToken}`)
 
+
+// main backend url 
+const mainUrl = "https://terah-portifolio-bn.onrender.com";
+
 //Getting all database blogs
 const getBlogs = async()=>{
-    const response = await fetch('https://my-bland.cyclic.app/blogs');
+    const response = await fetch(`${mainUrl}/blogs`);
     const blogs =  await response.json();
     return blogs
 }
@@ -102,7 +106,8 @@ async function formValidation(){
     const click_loader = document.querySelector('.click_loader');
     click_loader.className += " show";
 try {
-    const response = await fetch('https://my-bland.cyclic.app/messages',{
+    console.log('data url ', mainUrl);
+    const response = await fetch(`${mainUrl}/messages`,{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
@@ -151,7 +156,7 @@ async function login_validate(){
     let pinValue = pin.value.trim();
 
     try {
-        const response = await fetch('https://my-bland.cyclic.app/user/login',{
+        const response = await fetch(`${mainUrl}/user/login`,{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -284,7 +289,7 @@ if(commForm){
         const textValue = CommMsg.value.trim();
         try {
             let blogId = location.href.split('=')[1];
-            const response = await fetch(`https://my-bland.cyclic.app/blogs/${blogId}/comment`,{
+            const response = await fetch(`${mainUrl}/blogs/${blogId}/comment`,{
                 method: 'POST',
                 headers: header,
                 body: JSON.stringify({
@@ -314,7 +319,7 @@ async function commentDisplay(){
     const cont = document.querySelector(".comment-container");
     if (cont) {
         let blogId = location.href.split("=")[1];
-        const response = await fetch(`https://my-bland.cyclic.app/blogs/${blogId}`);
+        const response = await fetch(`${mainUrl}/blogs/${blogId}`);
         const currentBlog =  await response.json();
     if (currentBlog) {
             const allComments = currentBlog.comments;
@@ -357,7 +362,7 @@ commentDisplay();
 
 async function countComment(){
     let blog_id = location.href.split("=")[1];
-    const response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}`);
+    const response = await fetch(`${mainUrl}/blogs/${blog_id}`);
     const currentBlog =  await response.json();
 
     let commElement = document.querySelectorAll("#commLength");
@@ -380,7 +385,7 @@ if (like) {
             popup(coreMsg)
         }
         try {
-            const response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/like`,{
+            const response = await fetch(`${mainUrl}/blogs/${like_blog_id}/like`,{
 
                 method: 'PUT',
                 headers: header
@@ -407,7 +412,7 @@ if (like) {
 }
 //count like
 const countLike = async()=>{
-    let response = await fetch(`https://my-bland.cyclic.app/blogs/${like_blog_id}/likes`);
+    let response = await fetch(`${mainUrl}/blogs/${like_blog_id}/likes`);
     let res = await response.json();
     
     if (blog_id) {
@@ -491,7 +496,7 @@ async function blogDisplay(){
     if (cont) {
     if (blogs.length > 0 ) {
         // let location = JSON.parse(localStorage.getItem("articleData"))[blog_id];
-        let response2 = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}`);
+        let response2 = await fetch(`${mainUrl}/blogs/${blog_id}`);
         let blog = await response2.json()
             cont.innerHTML = "";
                 cont.innerHTML = `
@@ -594,7 +599,7 @@ async function userSignValidation(){
     const pinValue = userSignpin.value.trim();
 
 try {
-    const response = await fetch('https://my-bland.cyclic.app/user/signup',{
+    const response = await fetch(`${mainUrl}/user/signup`,{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'

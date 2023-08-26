@@ -3,6 +3,9 @@ if (adminToken == null) {
     window.location.replace('login.html');
 }
 
+// main backend url
+const mainUrl = "https://terah-portifolio-bn.onrender.com";
+
 //loader
 const click_loader = document.querySelector('.click_loader');
 
@@ -118,7 +121,7 @@ function success(element){
             if (imageValue.length > 0) {
                 const reader = new FileReader();
                 reader.addEventListener("load",async()=>{
-                    const response = await fetch('https://my-bland.cyclic.app/blogs',{
+                    const response = await fetch(`${mainUrl}/blogs`,{
                         method: 'POST',
                         headers: header,
                         body: JSON.stringify({
@@ -153,7 +156,7 @@ function success(element){
                 const reader = new FileReader();
                     reader.addEventListener("load",async()=>{
                         console.log(selectedId)
-                        const response = await fetch(`https://my-bland.cyclic.app/blogs/${selectedId}/update`,{
+                        const response = await fetch(`${mainUrl}/blogs/${selectedId}/update`,{
                             method: 'PATCH',
                             headers: header,
                             body: JSON.stringify({
@@ -191,7 +194,7 @@ function success(element){
         //display article table section
            async function articleTable(){
             const artCont = document.querySelector(".art-table");
-            const response = await fetch('https://my-bland.cyclic.app/blogs');
+            const response = await fetch(`${mainUrl}/blogs`);
             const blogs =  await response.json();
             if (artCont) {
                 const tbody = artCont.querySelector("tbody")
@@ -241,7 +244,7 @@ function success(element){
             click_loader.className += " show";
 
             try {
-                const response = await fetch(`https://my-bland.cyclic.app/blogs/${id}`,{
+                const response = await fetch(`${mainUrl}/blogs/${id}`,{
                     method: 'DELETE',
                     headers: header
                 })
@@ -266,7 +269,7 @@ function success(element){
         async function update(id){
             selectedId = id;
             addBlogBtn.value = 'Update Blog';
-            const response = await fetch(`https://my-bland.cyclic.app/blogs/${id}`)
+            const response = await fetch(`${mainUrl}/blogs/${id}`)
             const blog = await response.json();
             document.getElementById("title").value = blog.head;
             function submitaftersetdata() {
@@ -285,7 +288,7 @@ function success(element){
 
 async function userCount(){
     try {
-        const response = await fetch('https://my-bland.cyclic.app/user',{
+        const response = await fetch(`${mainUrl}/user`,{
                     method: 'GET',
                     headers: header
         });
@@ -306,7 +309,7 @@ userCount();
 // count articles
 
 async function artCount(){
-    const response = await fetch('https://my-bland.cyclic.app/blogs');
+    const response = await fetch(`${mainUrl}/blogs`);
     const blogs =  await response.json();
     let blogElm = document.getElementById("artNum");
     if (blogElm) {
@@ -321,7 +324,7 @@ artCount();
 
         async function contactDisplay(){
             const tbody = document.getElementById("contact-table");
-            const response = await fetch('https://my-bland.cyclic.app/messages',{
+            const response = await fetch(`${mainUrl}/messages`,{
                 method: 'GET',
                 headers: header
             });
@@ -358,7 +361,7 @@ artCount();
         async function contactDel(id){
             click_loader.className += " show";
             try {
-                const response = await fetch(`https://my-bland.cyclic.app/messages/${id}`,{
+                const response = await fetch(`${mainUrl}/messages/${id}`,{
                     method: 'DELETE',
                     headers: header
                 })
@@ -383,7 +386,7 @@ artCount();
     async function commentDisplay(){
         const commCont = document.querySelector(".comment-table");
         let blog_id = location.href.split("=")[1];
-        let response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}/comments`);
+        let response = await fetch(`${mainUrl}/blogs/${blog_id}/comments`);
         let comments = await response.json();
         
         if (blog_id) {
@@ -419,7 +422,7 @@ artCount();
     async function commDelete(id){
         try {
             let blog_id = location.href.split("=")[1];
-            const response = await fetch(`https://my-bland.cyclic.app/blogs/${blog_id}/comments/${id}`,{
+            const response = await fetch(`${mainUrl}/blogs/${blog_id}/comments/${id}`,{
                 method: 'DELETE',
                 headers: header
             })
@@ -472,7 +475,7 @@ async function formValidation(){
     const pinValue = pin.value.trim();
 
 try {
-    const response = await fetch('https://my-bland.cyclic.app/user/adminsignup',{
+    const response = await fetch(`${mainUrl}/user/adminsignup`,{
         method: 'POST',
         headers:{
             'Content-Type': 'application/json'
