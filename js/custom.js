@@ -3,7 +3,9 @@ const userToken = localStorage.getItem("userToken");
 const parsedTokenData = JSON.parse(userToken);
 const header = new Headers();
 header.append("Content-Type", "application/json");
-header.append("Authorization", `Bearer ${parsedTokenData?.token}`);
+if(parsedTokenData){
+  header.append("Authorization", `Bearer ${parsedTokenData.token}`);
+}
 
 // some declaration
 
