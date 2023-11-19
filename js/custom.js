@@ -69,9 +69,12 @@ const popup = (msg) => {
 -------------------------------
 */
 
-const subsBtn = document.querySelector(".btn-subs");
-const spinner_loader = document.querySelector(".spinner_loader");
-const btn_txt = document.querySelector(".btn-txt");
+const subsBtn = document.getElementById("btn-subs");
+const spinner_loader = document.getElementById("spinner_loader");
+const btn_txt = document.getElementById("btn-txt");
+// const subsBtn = document.getlem(".btn-subs");
+// const spinner_loader = document.querySelector(".spinner_loader");
+// const btn_txt = document.querySelector(".btn-txt");
 
 const startLoader = () => {
   spinner_loader.classList.add("button--loading");
@@ -597,13 +600,14 @@ let CommMsg = document.querySelector(".commMsg");
 if (commForm) {
   commForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-
+    startLoader();
     function setCommError(messages) {
       const errorDis = document.querySelector("#commErr");
       errorDis.innerHTML = messages;
       errorDis.style.color = "red";
     }
     if (userToken === null) {
+      stopLoader()
       const coreMsg = "login before commenting";
       popup(coreMsg);
     }
@@ -619,9 +623,11 @@ if (commForm) {
       });
       const res = await response.json();
       if (res.comment == textValue) {
+        stopLoader()
         const successMsg = "Complite to commenting";
         popup(successMsg);
       } else {
+        stopLoader()
         setCommError(res);
       }
     } catch (error) {
