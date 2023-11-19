@@ -1,39 +1,18 @@
 //get token and set to header
 const userToken = localStorage.getItem("userToken");
-const parsedTokenData = JSON.parse(userToken);
 const header = new Headers();
 header.append("Content-Type", "application/json");
-if(parsedTokenData){
-  header.append("Authorization", `Bearer ${parsedTokenData.token}`);
-}
-
-// some declaration
-
-const userProfile = document.querySelector(".userProfile");
-const openProfBtn = document.querySelector("#openProfile");
-
-// check user login
-let checkLogin = false;
-userToken ? (checkLogin = true) : (checkLogin = false);
+header.append("Authorization", `Bearer ${userToken}`);
 
 // main backend url
-const mainUrl = "https://terah-portifolio-bn.onrender.com";
-// const mainUrl = "http://localhost:2000";
-
+// const mainUrl = "https://terah-portifolio-bn.onrender.com";
+const mainUrl = "http://localhost:2000";
 
 /*
 -------------------------------
     Blogs API
 -------------------------------
 */
-
-// logout functionality
-
-const logout = document.querySelector(".logoutBtn");
-logout.addEventListener("click", () => {
-  localStorage.removeItem("userToken");
-  location.reload();
-});
 
 const getBlogs = async () => {
   const response = await fetch(`${mainUrl}/blogs`);
@@ -47,21 +26,19 @@ const popup = (msg) => {
   let modal = document.getElementById("myModal");
   let closeBtn = document.getElementById("myBtn");
   //popup part
-  if (modal) {
-    modal.style.display = "block";
-    document.getElementById("popupMsg").innerHTML = msg;
+  modal.style.display = "block";
+  document.getElementById("popupMsg").innerHTML = msg;
 
-    closeBtn.onclick = function () {
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+    location.reload();
+  };
+  window.onclick = function (event) {
+    if (event.target == modal) {
       modal.style.display = "none";
       location.reload();
-    };
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-        location.reload();
-      }
-    };
-  }
+    }
+  };
 };
 
 /*
@@ -76,7 +53,7 @@ const btn_txt = document.querySelector(".btn-txt");
 
 const startLoader = () => {
   spinner_loader.classList.add("button--loading");
-  subsBtn.style.background = "rgba(0, 140, 186, 1)";
+  subsBtn.style.background = "rgba(0, 140, 186, 0.4)";
   subsBtn.style.opacity = "0.5";
   subsBtn.disabled = true;
 };
@@ -105,88 +82,16 @@ if (menu) {
   });
 }
 
-// profile menubar
-
-const profMenuBar = document.querySelector(".profMenuBar");
-if (profMenuBar) {
-  profMenuBar.addEventListener("click", () => {
-    let icon = document.getElementById("icon-1");
-    let left = document.querySelector(".leftProf");
-    left.style.margin = 0;
-    left.style.width = "50%";
-  });
-}
-const profMenuClose = document.querySelector(".profMenuClose");
-if (profMenuClose) {
-  profMenuClose.addEventListener("click", () => {
-    let left = document.querySelector(".leftProf");
-    left.style.margin = "-50%";
-  });
-}
-// open profile
-
-if (openProfBtn) {
-  openProfBtn.addEventListener("click", () => {
-    userProfile.style.display = "block";
-  });
-}
-// close bar for profile
-
-const closeProf = document.querySelector(".closeProf");
-
-if (closeProf) {
-  closeProf.addEventListener("click", () => {
-    userProfile.style.display = "none";
-  });
-}
 //display user account box in navigation header
 
 const userImg = document.getElementById("userImg");
 const accountBox = document.getElementById("accountBlock");
-const loginBox = document.querySelector(".loginBox");
-const email = document.querySelector("#email");
-
-// profile email and name
-let profName = document.getElementById("nameInput");
-let profEmail = document.getElementById("emailInput");
-const requestAdminRole = document.querySelector("#requestAdminRole");
-
-if (checkLogin) {
-  /*
-    Get Profile api
-  */
-  async function getProfile() {
-    const response = await fetch(`${mainUrl}/user/profile`, {
-      method: "GET",
-      headers: header,
-    });
-    const profile = await response.json();
-    email.innerHTML = profile.user.email;
-    profName.value = profile.user.name;
-    profEmail.value = profile.user.email;
-
-    if (profile.user.requestAdminRole === true) {
-      requestAdminRole.checked = true;
-    } else {
-      requestAdminRole.checked = false;
-    }
-  }
-  getProfile();
-}
 if (userImg) {
   userImg.addEventListener("click", () => {
-    if (checkLogin) {
-      if (loginBox.style.display === "block") {
-        loginBox.style.display = "none";
-      } else {
-        loginBox.style.display = "block";
-      }
+    if (accountBox.style.display === "block") {
+      accountBox.style.display = "none";
     } else {
-      if (accountBox.style.display === "block") {
-        accountBox.style.display = "none";
-      } else {
-        accountBox.style.display = "block";
-      }
+      accountBox.style.display = "block";
     }
   });
 }
@@ -194,7 +99,6 @@ if (userImg) {
 window.addEventListener("click", (event) => {
   if (!userImg.contains(event.target)) {
     accountBox.style.display = "none";
-    loginBox.style.display = "none";
   }
 });
 
@@ -212,14 +116,13 @@ if (experience) {
 
 //contact form validation
 let userName = document.getElementById("name");
-let userEmail = document.getElementById("contEmail");
+let userEmail = document.getElementById("email");
 let msg = document.getElementById("msg");
 let form = document.getElementById("form");
 
 if (form) {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    startLoader();
     sendMessage();
   });
 }
@@ -253,6 +156,7 @@ if (sub_form) {
   });
 }
 
+// console.log("is okay", isLoading)
 // if (isLoading) {
 //     subsBtn.classList.add("button--loading");
 // }
@@ -290,72 +194,6 @@ const isValidEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
-// skeleton home blogs
-
-const blogCont = document.querySelector(".loc_blog");
-const recent_posts = document.querySelector(".recent_posts");
-if (blogCont) {
-  const cardTemplate = document.getElementById("card-template");
-  for (let i = 0; i < 3; i++) {
-    blogCont.append(cardTemplate.content.cloneNode(true));
-  }
-}
-if (recent_posts) {
-  const cardTemplate = document.getElementById("card-template");
-  for (let i = 0; i < 2; i++) {
-    recent_posts.append(cardTemplate.content.cloneNode(true));
-  }
-}
-
-// skeleton for blog details
-
-const blogDetl = document.querySelector("#blog_display");
-const blog_template = document.querySelector(".blog-template");
-if (blogDetl) {
-  blogDetl.append(blog_template.content.cloneNode(true));
-}
-// skeleton recent
-
-const recentBlog = document.querySelector("#recentBlog");
-if (recentBlog) {
-  const recent_template = document.getElementById("recent-template");
-  for (let i = 0; i < 2; i++) {
-    recentBlog.append(recent_template.content.cloneNode(true));
-  }
-}
-
-// profile handles
-
-function openProfile(evt, elem) {
-  let i, tabContent, tabLinks;
-
-  tabContent = document.getElementsByClassName("tabContent");
-  for (i = 0; i < tabContent.length; i++) {
-    tabContent[i].style.display = "none";
-  }
-
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" profActive", "");
-  }
-
-  document.getElementById(elem).style.display = "block";
-  evt.currentTarget.className += " profActive";
-}
-document.getElementById("defaultOpen").click();
-
-// update
-
-const updateForm = document.querySelector(".updateForm");
-let saveBtn = document.querySelector(".saveBtn");
-
-if (updateForm) {
-  updateForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    startLoader();
-  });
-}
-
 /*
 ------------------------------------------------
 
@@ -377,189 +215,99 @@ function subValidation() {
     subSucc(sub_email);
     count++;
   }
-}
-async function sendMessage() {
-  const nameValue = userName.value.trim();
-  const emailValue = userEmail.value.trim();
-  const textValue = msg.value.trim();
-  try {
-    const response = await fetch(`${mainUrl}/messages`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nameValue,
-        email: emailValue,
-        message: textValue,
-      }),
-    });
-    const res = await response.json();
 
-    if (res == "message received") {
-      stopLoader();
-      const successMsg = "Message received";
-      popup(successMsg);
-    } else {
-      stopLoader();
-      setError(res);
+  async function sendMessage() {
+    const nameValue = userName.value.trim();
+    const emailValue = userEmail.value.trim();
+    const textValue = msg.value.trim();
+    const click_loader = document.querySelector(".click_loader");
+    click_loader.className += " show";
+    try {
+      console.log("data url ", mainUrl);
+      const response = await fetch(`${mainUrl}/messages`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nameValue,
+          email: emailValue,
+          message: textValue,
+        }),
+      });
+      const res = await response.json();
+
+      if (res == "message received") {
+        click_loader.className += " hide";
+        const successMsg = "Message received";
+        popup(successMsg);
+      } else {
+        click_loader.className += " hide";
+        setError(res);
+      }
+    } catch (error) {
+      // console.log(error)
+      setError(error);
     }
-  } catch (error) {
-    console.log(error);
   }
-}
 
-//login form validation
+  //login form validation
 
-let name = document.getElementById("userName");
-let pin = document.getElementById("pin");
-let login_form = document.getElementById("login_form");
+  let name = document.getElementById("userName");
+  let pin = document.getElementById("pin");
+  let login_form = document.getElementById("login_form");
 
-if (login_form) {
-  login_form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    login_validate();
-  });
-}
+  if (login_form) {
+    login_form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      login_validate();
+    });
+  }
 
-/*
+  /*
 -------------------------------
     Login api
 -------------------------------
 */
 
-async function login_validate() {
-  let userValue = name.value.trim();
-  let pinValue = pin.value.trim();
-  console.log("some thing happen");
-  startLoader();
-  try {
-    const response = await fetch(`${mainUrl}/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userValue,
-        password: pinValue,
-      }),
-    });
-    const res = await response.json();
-    if (res) {
-      if (res.role == "user") {
-        stopLoader();
-        const userToken = {
-          name: res.name,
-          email: res.email,
-          role: res.role,
-          token: res.token,
-        };
-        localStorage.setItem("userToken", JSON.stringify(userToken));
-        const successMsg = "Now You can add comment and likes";
-        popup(successMsg);
-      } else {
-        stopLoader();
-
-        const userData = {
-          name: res.name,
-          email: res.email,
-          role: res.role,
-          token: res.token,
-        };
-        localStorage.setItem("token", JSON.stringify(userData));
-        location.href = "dashboard/admin.html";
-      }
-    }
-  } catch (error) {
-    stopLoader();
-    setError("Wrong input email or password");
-  }
-}
-
-/*
--------------------------------
-    profile update api
--------------------------------
-*/
-
-const userUpdateForm = document.querySelector(".updateUserForm");
-
-if (userUpdateForm) {
-  userUpdateForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  async function login_validate() {
+    let userValue = name.value.trim();
+    let pinValue = pin.value.trim();
 
     try {
-      const response = await fetch(`${mainUrl}/user/update`, {
-        method: "PATCH",
-        headers: header,
+      const response = await fetch(`${mainUrl}/user/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          name: profName.value,
-          email: profEmail.value,
+          email: userValue,
+          password: pinValue,
         }),
       });
       const res = await response.json();
-      if (res.status === 200) {
-        const successMsg = res.message;
-        popup(successMsg);
-      } else {
-        // check below code
-        setError(res);
+      console.log(res);
+      if (res) {
+        if (res.role == "Guest") {
+          const userToken = res.token;
+          localStorage.setItem("userToken", userToken);
+          const successMsg = "Now You can add comment and likes";
+          popup(successMsg);
+        } else {
+          const userData = {
+            name: res.name,
+            token: res.token,
+          };
+          localStorage.setItem("token", JSON.stringify(userData));
+          location.href = "admin.html";
+        }
       }
     } catch (error) {
-      console.log(error);
+      setError("Wrong input email or password");
     }
-  });
-}
+  }
 
-/*
--------------------------------
-    Request admin role api
--------------------------------
-*/
-
-if (requestAdminRole) {
-  requestAdminRole.addEventListener("change", async () => {
-    if (requestAdminRole.checked) {
-      try {
-        const response = await fetch(`${mainUrl}/user/request/admin`, {
-          method: "PATCH",
-          headers: header,
-        });
-        const res = await response.json();
-        if (res.status === 200) {
-          requestAdminRole.checked = true;
-          const successMsg = res.message;
-          popup(successMsg);
-        } else {
-          // check below code
-          setError(res);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        const response = await fetch(`${mainUrl}/user/request/reject`, {
-          method: "PATCH",
-          headers: header,
-        });
-        const res = await response.json();
-        if (res.status === 200) {
-          requestAdminRole.checked = true;
-          const successMsg = res.message;
-          popup(successMsg);
-        } else {
-          // check below code
-          setError(res);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  });
-}
-
-/*     if(emailVal){
+  /*     if(emailVal){
         if (count == 1) {
             function sub(){
                 let subData = JSON.parse(localStorage.getItem('subData')) || [];
@@ -583,6 +331,7 @@ if (requestAdminRole) {
             sub(); 
         }
     } */
+}
 
 /*
 -------------------------------
@@ -662,7 +411,7 @@ async function commentDisplay() {
                                     <p class="time">LAST UPDATED ON: ${data.date}</p>
                                 </div>
                                 <div class="body">
-                                    <h2 class='font-semibold'>By: ${data.name}</h2>
+                                    <h2>${data.name}</h2>
                                 </div>
                                 <div class="comm-footer">
                                 <p>${data.comment} </p>
@@ -765,11 +514,12 @@ countLike();
 
 async function art_detailDisplay() {
   const cont = document.querySelector(".loc_blog");
-  const recent_posts = document.querySelector(".recent_posts");
   const loader = document.querySelector(".loader");
   const blogs = await getBlogs();
-  countLike();
   if (blogs) {
+    if (loader) {
+      loader.style.display = "none";
+    }
     if (blogs.length > 0) {
       const cutStr = (val, size) => {
         let newString = val.split(" ");
@@ -785,106 +535,27 @@ async function art_detailDisplay() {
         for (let index = blogs.length - 1; index >= 0; index--) {
           const data = blogs[index];
           cont.innerHTML += `
-          <div class="art-item">
-                <div class="row">
-                    <div class="col-img">
-                      <img src="${data.image.url}" alt="" />
-                    </div>
-                    <div class="col-content">
-                      <div class="head">
-                        <h1 id="detail" class="font-semibold">
-                        ${data.head}
-                        </h1>
-                        <div class="blog-owner d-flex my-3 font-semibold">
-                          <div>By: <span>${
-                            data.userPost ? data.userPost.name : "John Doe"
-                          }</span></div>
-                          <div class="d-flex">
-                            <div class="d-flex mx-2">
-                              <div class="mr-1">
-                                <i class="fa-solid fa-thumbs-up"></i>
-                              </div>
-                              <div>${data.likes.count}</div>
+                        <div class="art-item">
+                            <div class="row">
+                                <div class="col-img">
+                                    <img src="${data.image.url}" alt="">
+                                </div>
+                                <div class="col-content">
+                                    <div class="head">
+                                        <h1 id='detail'>${data.head}</h1>
+                                    </div>
+                                    <div class="body">
+                                        <p >${cutStr(data.body, 13)}...</p>
+                                    </div>
+                                    <div class="art-footer">
+                                        <a href="blog-2.html?id=${
+                                          data._id
+                                        }" id='viewMore'>view more</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex">
-                              <div class="mr-1">
-                                <i class="fa-solid fa-comment"></i>
-                              </div>
-                              <div>${data.comments.length}</div>
-                            </div>
-                          </div>
                         </div>
-                      </div>
-                      <div class="body">
-                        <p>
-                        ${cutStr(data.body, 20)}...
-                        </p>
-                      </div>
-                      <div class="art-footer">
-                      <a href="blog-2.html?id=${
-                        data._id
-                      }" id='viewMore'>Read more </a>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-                       
                         `;
-        }
-      }
-      if (recent_posts) {
-        recent_posts.innerHTML = "";
-        const recentBlogs = blogs.slice(-2).reverse();
-
-        for (let index = recentBlogs.length - 1; index >= 0; index--) {
-          const data = blogs[index];
-
-          recent_posts.innerHTML += `
-            <div class="art-item">
-                  <div class="row">
-                      <div class="col-img">
-                        <img src="${data.image.url}" alt="" />
-                      </div>
-                      <div class="col-content">
-                        <div class="head">
-                          <h1 id="detail" class="font-semibold">
-                          ${data.head}
-                          </h1>
-                          <div class="blog-owner d-flex my-3 font-semibold">
-                            <div>By: <span>${
-                              data.userPost ? data.userPost.name : "John Doe"
-                            }</span></div>
-                            <div class="d-flex">
-                              <div class="d-flex mx-2">
-                                <div class="mr-1">
-                                  <i class="fa-solid fa-thumbs-up"></i>
-                                </div>
-                                <div>${data.likes.count}</div>
-                              </div>
-                              <div class="d-flex">
-                                <div class="mr-1">
-                                  <i class="fa-solid fa-comment"></i>
-                                </div>
-                                <div>${data.comments.length}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="body">
-                          <p>
-                          ${cutStr(data.body, 20)}...
-                          </p>
-                        </div>
-                        <div class="art-footer">
-                        <a href="blog-2.html?id=${
-                          data._id
-                        }" id='viewMore'>Read more </a>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                         
-                          `;
         }
       }
     } else {
@@ -894,10 +565,9 @@ async function art_detailDisplay() {
 }
 art_detailDisplay();
 
-// display blog by id
+// display blog by id mean one blog instead of all blog
 
 let blog_id = location.href.split("=")[1];
-console.log("id: ", blog_id);
 
 //display blogs description based on id in file(blog-2)
 async function blogDisplay() {
@@ -955,12 +625,12 @@ async function recentBlogs() {
       for (let index = 0; index < newArr.length; index++) {
         const data = newArr[index];
         cont.innerHTML += `
-                    <div class="blog_col pb-4">
+                    <div class="blog_col">
                         <a href= "blog-2.html?id=${data._id}">
                             <div class="blogImg">
                                 <img src="${data.image.url}" alt="">
                             </div>
-                            <div class="blogHead text-xl font-semibold">
+                            <div class="blogHead">
                                 
                                     <h3>${data.head}</h3>
                                 
@@ -984,7 +654,7 @@ recentBlogs();
 
 //contact form validation
 let userSignName = document.getElementById("name");
-let userSignEmail = document.getElementById("signupEmail");
+let userSignEmail = document.getElementById("email");
 let userSignpin = document.getElementById("pin");
 let userForm = document.getElementById("user_signup_form");
 
@@ -1005,7 +675,7 @@ async function userSignValidation() {
   const nameValue = userSignName.value.trim();
   const emailValue = userSignEmail.value.trim();
   const pinValue = userSignpin.value.trim();
-  startLoader();
+
   try {
     const response = await fetch(`${mainUrl}/user/signup`, {
       method: "POST",
@@ -1020,15 +690,12 @@ async function userSignValidation() {
     });
     const res = await response.json();
 
-    if (res.status == 200) {
-      stopLoader;
+    if (res.name == nameValue) {
       window.location.href = "login.html";
     } else {
-      stopLoader;
       setError(res);
     }
   } catch (error) {
-    stopLoader();
-    console.log(error);
+    setError(error);
   }
 }

@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Terah</title>
-		<link
-		  rel="stylesheet"
-		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
-		/>
-		<link
-		  rel="stylesheet"
-		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
-		/>
-		<!--   font links   -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-		  href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins&display=swap"
-		  rel="stylesheet"
-		/>
-		<link rel="stylesheet" href="css/all.css" />
-		<link
-		  rel="stylesheet"
-		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-		  integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-		  crossorigin="anonymous"
-		  referrerpolicy="no-referrer"
-		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-		  href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins&display=swap"
-		  rel="stylesheet"
-		/>
-		<link
-		  rel="stylesheet"
-		  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
-		/>
-		<!--   slick   -->
-		<link
-		  rel="stylesheet"
-		  type="text/css"
-		  href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-		/>
-	
-		<!-- boostrap -->
-		<link
-		  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-		  rel="stylesheet"
-		  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-		  crossorigin="anonymous"
-		/>
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-	
-		<link rel="stylesheet" href="css/style.css" />
-	  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terah</title>
+	<link
+	rel="stylesheet"
+	href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css"
+  />
+  <link
+	rel="stylesheet"
+	href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+  />
+  <!--   font links   -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+	href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins&display=swap"
+	rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/all.css" />
+  <link
+	rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+	href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins&display=swap"
+	rel="stylesheet"
+  />
+  <link
+	rel="stylesheet"
+	href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+  />
+  <!--   slick   -->
+  <link
+	rel="stylesheet"
+	type="text/css"
+	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+  />
+
+  <!-- boostrap -->
+  <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
 <body>
     
-	<!-- Header Navigation -->
+
+
 	<nav class="navbars shadow-sm">
 		<div class="cont">
 		  <div class="log">
@@ -68,6 +69,7 @@
 		  </div>
 		  <div class="links" id="navbar">
 			<ul>
+			  
 			  <li>
 				<div class="userAccount">
 				  <div class="userImg" id="userImg">
@@ -116,7 +118,18 @@
 	  </nav>
 
 
-	  
+		<!-- popup -->
+		<div id="myModal" class="modal">
+
+			<div class="modal-content">
+			<p id="popupMsg"></p>
+			<button id="myBtn">ok</button>
+			</div>
+		
+		</div>
+
+
+		
     <!-- profile update popup  -->
 
     <div class="userProfile" style="display: none;">
@@ -196,9 +209,15 @@
 		</div>
 	  </div>
 
+    <!--                form section             -->
 
-	  <section class="projects" id="blogs">
-		<div class="container">
+
+    <div class="login">
+        <div class="container">
+            <!-- <div class="head">
+                <h1>admin login</h1>
+                <h2>admin dashboard for controling website</h2>
+            </div> -->
 			<div class="back-home">
 				<a
 				  href="index.html"
@@ -207,43 +226,45 @@
 				  <i class="fa-solid fa-house"></i> Back Home</a
 				>
 			  </div>
-		  <h1 class="sect-header text-center font-semibold">Recent articles</h1>
-  
-		  <div class="articles">
-			<div class="loc_blog"></div>
-		  </div>
-		  <template id="card-template">
-			<div class="art-item">
-			  <div class="row">
-				<div class="col-img">
-				  <img class="skeleton" alt="" src="path/to/your/placeholder-image.jpg" />
-				</div>
-				<div class="col-content">
-				  <div class="head">
-					<h1 id="detail" class="font-semibold">
-					  <div class="skeleton skeleton-head"></div>
-					</h1>
-					<div class="blog-owner d-flex my-3 font-semibold">
-					  <div class="skeleton skeleton-text skeleton_subhead"></div>
-					  <div class="skeleton skeleton-text skeleton_subhead"></div>
-					</div>
-				  </div>
-				  <div class="body">
-					<p class="skeleton skeleton-text skeleton-text__body"></p>
-					<p class="skeleton skeleton-text skeleton-text__body"></p>
-					<p class="skeleton skeleton-text skeleton-text__body"></p>
-				  </div>
-				  <div class="art-footer skeleton-footer">
-					<a class="skeleton skeleton-text skeleton-footer"></a>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </template>
-		</div>
-	  </section>
+            <div class="row">
+                <div class="info">
 
-	  <footer class="main-footer">
+                </div>
+                <div class="form">
+                    <h1 class="subHead">Sign Up</h1>
+                    <div class="userSignup">
+                        <form method="POST" id="user_signup_form" action="userSignup.html">
+                            <div class="error"></div>
+                            <div class="input-control">
+                                <label for="name">Enter Name</label><br>
+                                <input type="text" placeholder="Your name" id="name"><br>
+                            </div>
+                           <div class="input-control">
+                                <label for="email">Enter Email</label><br>
+                                <input type="text" placeholder="Your Email" id="signupEmail"><br>
+                           </div>
+                           <div class="input-control">
+                                <label for="password">Enter Password</label><br>
+                                <input type="password" placeholder="Enter Passord" id="pin"><br>
+                           </div>
+						   
+						   <button class="btn-subs mt-3">
+							<div class="spinner_loader"></div>
+							<span class="btn-txt">SUBMIT</span>
+						  </button>
+                            <!-- <input type="submit" value="SUBMIT" class="signupBtn"><br> -->
+                            
+                        </form>
+						<div class="d-flex justify-content-center">
+							Have account? <a href="login.html" class="ml-2 text-blue-500 font-semibold"> login</a>
+						</div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<footer class="main-footer">
 		<div class="container">
 		  <div class="d-flex  flex-column align-items-center fo-content">
 			<div class="fo-name"><a href="index.html">Terah</a></div>
@@ -259,34 +280,12 @@
 		  </div>
 		</div>
 	  </footer>
-	
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+	  
     <!-- tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="js/slides.js"></script>
-    <script src="js/customJquery.js"></script>
-	<script
-	src="https://unpkg.com/react@18/umd/react.development.js"
-	crossorigin
-  ></script>
-  <script
-	src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
-	crossorigin
-  ></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script src="js/WOW/dist/wow.min.js"></script>
-    <script type="text/babel" src="js/custom.js"></script>
+    <!-- tailwind end -->  
+	<script src="tinymce/js/tinymce/tinymce.min.js"></script>
+	<script  src="js/custom.js" ></script>
 </body>
 </html>
