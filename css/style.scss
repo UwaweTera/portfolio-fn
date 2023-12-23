@@ -130,7 +130,9 @@ $outFont: outfit;
     cursor: pointer;
   }
 }
-
+a{
+  text-decoration: none;  
+}
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
@@ -1000,7 +1002,7 @@ body {
   .proj-3 {
     .proj-img {
       background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url("../imgs/movie-trailer.png");
+        url("../imgs/shaka.png");
     }
   }
 }
