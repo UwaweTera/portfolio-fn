@@ -80,6 +80,10 @@ html {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
@@ -929,7 +933,7 @@ body {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/devpulse.png");
 }
 .projects .proj-3 .proj-img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/movie-trailer.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/shaka.png");
 }
 
 .main-footer {
