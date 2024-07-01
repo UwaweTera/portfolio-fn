@@ -790,8 +790,8 @@ async function art_detailDisplay() {
         for (let index = blogs.length - 1; index >= 0; index--) {
           const data = blogs[index];
           cont.innerHTML += `
-          <div class="art-item">
-                <div class="row">
+          <div class="art-item  ">
+                <div class="row border border-red-500">
                     <div class="col-img">
                       <img src="${data.image.url}" alt="" />
                     </div>
