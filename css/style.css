@@ -124,7 +124,7 @@ a {
 }
 
 section {
-  padding: 70px 0;
+  padding: 50px 0;
 }
 
 .subHead {
@@ -304,7 +304,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: left;
-  width: 150px;
+  width: 200px;
 }
 .navbars .log img {
   width: 40px;
@@ -870,20 +870,15 @@ body {
   margin-top: 15px;
 }
 
-.projects .proj-boxs {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
-  gap: 2%;
-}
 .projects .proj-boxs .proj-box {
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: #fff;
 }
 .projects .proj-boxs .proj-box .proj-img {
   position: relative;
   width: 100%;
-  height: 270px;
-  border-radius: 16px 16px 0 0;
+  height: 200px;
+  border-radius: 8px 8px 0 0;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -909,8 +904,6 @@ body {
 }
 .projects .proj-boxs .proj-box .proj-view a {
   text-decoration: none;
-  padding: 10px 0;
-  font-size: 17px;
   display: inline-block;
 }
 @media screen and (max-width: 950px) {
@@ -927,13 +920,21 @@ body {
   display: block;
 }
 .projects .proj-1 .proj-img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/ecommerce.png");
+  background-image: url("../imgs/social-links.png");
+  background-position: center;
 }
 .projects .proj-2 .proj-img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/devpulse.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../imgs/shaka.png");
+  background-size: cover;
 }
 .projects .proj-3 .proj-img {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/shaka.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../imgs/travel.png");
+  background-size: cover;
+  background-position: center;
+}
+.projects .proj-4 .proj-img {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/emr.png");
+  background-position: center;
 }
 
 .main-footer {
@@ -1753,9 +1754,6 @@ body {
   text-decoration: none;
 }
 
-.articles {
-  margin: 50px 0;
-}
 .articles .container {
   width: 90%;
   margin: 0 auto;
@@ -1795,8 +1793,7 @@ body {
 }
 .articles .art-item {
   border-top: 1px solid #e7e6e6;
-  margin: 30px 0;
-  padding: 30px 0;
+  padding: 15px 0;
 }
 .articles .art-item .row {
   display: flex;
@@ -2361,7 +2358,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: start;
-  width: 150px;
 }
 .admin .leftSide .body .head .log img {
   width: 50px;

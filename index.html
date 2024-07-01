@@ -63,7 +63,7 @@
       <div class="cont">
         <div class="log">
           <div class="log-name">
-            <a href="index.html">U<span class="color">.</span>Terah</a>
+           </span>Terah</a>
           </div>
         </div>
         <div class="links" id="navbar">
@@ -110,14 +110,16 @@
 
                   <div class="other-settings">
                     <div>
-                        <div class="d-flex" id="openProfile">
-                          <div><i class="fa-regular fa-user"></i></div>
-                          <div>Profile</div>
-                        </div>
+                      <div class="d-flex" id="openProfile">
+                        <div><i class="fa-regular fa-user"></i></div>
+                        <div>Profile</div>
+                      </div>
                     </div>
                     <div>
                       <div class="d-flex logoutBtn">
-                        <div><i class="fa-solid fa-arrow-right-from-bracket"></i></div>
+                        <div>
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        </div>
                         <div>logout</div>
                       </div>
                     </div>
@@ -134,10 +136,10 @@
     </nav>
 
     <!-- popup -->
-    <div id="myModal" class="modal" >
+    <div id="myModal" class="modal">
       <div class="modal-content">
         <div class="markImg">
-          <img src="imgs/checkmark.png" alt="" srcset="">
+          <img src="imgs/checkmark.png" alt="" srcset="" />
         </div>
         <p class="sucsTitle">Success!</p>
         <p id="popupMsg"></p>
@@ -148,7 +150,7 @@
     <div id="myErrModal" class="errModal">
       <div class="modal-content">
         <div class="markImg">
-          <img src="imgs/cancelMark2.jpg" alt="" srcset="">
+          <img src="imgs/cancelMark2.jpg" alt="" srcset="" />
         </div>
         <p class="errTitle">Sorry</p>
         <p id="popupMsg">Something went wrong try again later</p>
@@ -156,11 +158,9 @@
       </div>
     </div>
 
-
-    
     <!-- profile update popup  -->
 
-    <div class="userProfile" style="display: none;">
+    <div class="userProfile" style="display: none">
       <div class="closeProf">
         <i class="fa-solid fa-xmark"></i>
       </div>
@@ -418,7 +418,8 @@
                 </div>
                 <div>
                   <p>
-                    I experienced working on new language like nextJs and svelte for e-commerce project
+                    I experienced working on new language like nextJs and svelte
+                    for e-commerce project
                   </p>
                 </div>
               </div>
@@ -587,184 +588,139 @@
       </a>
     </section>
 
-    <section class="projects" id="projects">
+    <div class="projects mt-5" id="projects">
       <div class="container">
         <h1 class="sect-header"><span class="color">My</span> Projects</h1>
 
-        <div class="proj-boxs">
+        <div class="proj-boxs grid grid-cols-2 md:grid-cols-4 gap-3">
           <div class="proj-box proj-1">
             <div class="proj-img">
               <div class="proj-view">
                 <a
-                  href="https://trojans-ec-fe.vercel.app/"
+                  href="https://uwawetera.github.io/Social-Links-Profile/"
                   target="_blank"
-                  class="bg-blue-500 rounded-full px-3 py-1 text-white font-semibold"
-                  ><i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  Demo</a
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
                 >
+                  Demo
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
                 <a
-                  href="https://github.com/atlp-rwanda/trojans-ec-fe"
+                  href="https://github.com/UwaweTera/Social-Links-Profile"
                   target="_blank"
-                  class="bg-blue-500 rounded-full px-3 py-1 text-white font-semibold"
-                  ><i class="fa-solid fa-code"></i> Source Code</a
-                >
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
+                  >Source Code <i class="fa-solid fa-code text-sm"></i>
+                </a>
               </div>
             </div>
             <div class="px-3 py-3">
-              <div class="proj-title text-2xl font-semibold">e-commerce</div>
-              <div class="proj-desc text-lg my-1">
-                Website where products can be sold
+              <div class="proj-title text-xl font-semibold">
+                Social Links Profile
               </div>
-              <div class="proj-langs">
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  React
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Redux
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Tailwind
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  NodeJs
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Express
-                </div>
-                <div
-                  class="border-2 border-sky-500 py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  MongoDB
-                </div>
-              </div>
+              <div class="proj-desc my-1">Form for social profile</div>
             </div>
           </div>
           <div class="proj-box proj-2">
             <div class="proj-img">
               <div class="proj-view">
                 <a
-                  href="https://beta.devpulse.org/"
+                  href="https://www.shaka.rw/"
                   target="_blank"
-                  class="bg-blue-500 rounded-full px-3 py-1 text-white font-semibold"
-                  ><i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  Demo</a
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
                 >
-                <a
-                  href="https://github.com/atlp-rwanda/atlp-pulse-fn"
+                  Demo
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
+                <!-- <a
+                  href="https://github.com/atlp-rwanda/trojans-ec-fe"
                   target="_blank"
-                  class="bg-blue-500 rounded-full  py-1 text-white font-semibold"
-                  ><i class="fa-solid fa-code"></i> Source Code</a
-                >
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
+                  >Source Code <i class="fa-solid fa-code text-sm"></i>
+                </a> -->
               </div>
             </div>
             <div class="px-3 py-3">
-              <div class="proj-title text-2xl font-semibold">Dev Pulse</div>
-              <div class="proj-desc text-lg my-1">
-                Website Managing organazations
-              </div>
-              <div class="proj-langs">
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  React
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Apollo
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Tailwind
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  NodeJs
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  GraphQL
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Prisma
-                </div>
-              </div>
+              <div class="proj-title text-xl font-semibold">Shaka</div>
+              <div class="proj-desc my-1">E-commerce website</div>
             </div>
           </div>
           <div class="proj-box proj-3">
             <div class="proj-img">
               <div class="proj-view">
                 <a
-                  href="http://shaka.rw"
+                  href="https://links-travel-agency-fn.vercel.app/"
                   target="_blank"
-                  class="bg-blue-500 rounded-full px-3 py-1 text-white font-semibold"
-                  ><i class="fa-solid fa-arrow-up-right-from-square"></i>
-                  Demo</a
+                  class="object-cover bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
                 >
-                <!-- <a href="http://" target="_blank" class="bg-blue-500 rounded-full px-3 py-1 text-white font-semibold"><i class="fa-solid fa-code"></i> Source Code</a> -->
+                  Demo
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
+                <!-- <a
+                  href="https://github.com/atlp-rwanda/trojans-ec-fe"
+                  target="_blank"
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
+                  >Source Code <i class="fa-solid fa-code text-sm"></i>
+                </a> -->
               </div>
             </div>
             <div class="px-3 py-3">
-              <div class="proj-title text-2xl font-semibold">Shaka</div>
-              <div class="proj-desc text-lg my-1">
-                E-commerce website
+              <div class="proj-title text-xl font-semibold">
+                Link Travel Agency
               </div>
-              <div class="proj-langs">
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
+              <div class="proj-desc my-1">
+                Website for travelers with packages
+              </div>
+            </div>
+          </div>
+          <div class="proj-box proj-4">
+            <div class="proj-img">
+              <div class="proj-view">
+                <a
+                  href="https://emr.skython.rw/"
+                  target="_blank"
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
                 >
-                  nextJs
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Svelte
-                </div>
-                <div
-                  class="border-2 border-sky-500  py-1 rounded-full hover:bg-blue-500 hover:text-white prog-lang"
-                >
-                  Prisma
-                </div>
+                  Demo
+                  <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
+                <!-- <a
+                  href="https://github.com/atlp-rwanda/trojans-ec-fe"
+                  target="_blank"
+                  class="bg-blue-500 rounded-full px-4 py-2 text-white text-sm block hover:bg-blue-700 transition duration-500"
+                  >Source Code <i class="fa-solid fa-code text-sm"></i>
+                </a> -->
+              </div>
+            </div>
+            <div class="px-3 py-3">
+              <div class="proj-title text-xl font-semibold">
+                Empower Mental Resilience
+              </div>
+              <div class="proj-desc my-1">
+                Website for mental health awareness
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-5 text-xl font-semibold">
+        <div class="mt-4">
           view more projects
           <a
             href="https://github.com/UwaweTera?tab=repositories"
             target="_blank"
-            class="btn btn-primary"
+            class="text-blue-500"
             >Here</a
           >
         </div>
       </div>
-    </section>
+    </div>
 
-    <section class="projects" id="blogs">
+    <section class="" id="blogs">
       <div class="container">
         <h1 class="sect-header">Latest <span class="color">Blogs</span></h1>
 
-        <div class="articles">
+        <div class="articles flex justify-center items-center">
           <div class="recent_posts"></div>
         </div>
-        
+
         <template id="card-template">
           <div class="art-item">
             <div class="row">
@@ -794,13 +750,17 @@
           </div>
         </template>
         <div class="viewAll_btn">
-          <a href="blogs.html" class="text-blue-500 text-center text-lg border-1 border-blue-500 py-2 px-3 hover:bg-white rounded">View All blogs</a>
+          <a
+            href="blogs.html"
+            class="text-blue-500 text-center text-sm border-1 border-blue-500 py-2 px-3 hover:bg-blue-500 hover:text-white rounded"
+            >View All blogs</a
+          >
         </div>
       </div>
     </section>
 
-    <section class="border border-white bg-white" id="contact">
-      <div class="contact">
+    <section class="bg-white" id="contact">
+      <div class="contact my-5 border border-red-500">
         <div class="container">
           <div class="row">
             <div class="info">
