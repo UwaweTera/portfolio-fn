@@ -813,39 +813,39 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-.resumeSection .grid-row {
+.resumeSection .container .grid-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   -moz-column-gap: 30px;
        column-gap: 30px;
   row-gap: 30px;
 }
-.resumeSection .grid-row .grid-col {
+.resumeSection .container .grid-row .grid-col {
   padding: 20px;
 }
-.resumeSection .grid-row .grid-col h4 {
+.resumeSection .container .grid-row .grid-col h4 {
   font-size: 20px;
   font-family: "Poppins", sans-serif;
 }
-.resumeSection .grid-row .grid-col .border-btm {
+.resumeSection .container .grid-row .grid-col .border-btm {
   border-bottom: 1px solid gainsboro;
   padding: 10px 0;
 }
-.resumeSection .grid-row .grid-row2 {
+.resumeSection .container .grid-row .grid-row2 {
   display: grid;
   grid-template-rows: auto;
   row-gap: 30px;
   -moz-column-gap: 30px;
        column-gap: 30px;
 }
-.resumeSection .grid-row .grid-row2 .myProgress .myBar {
+.resumeSection .container .grid-row .grid-row2 .myProgress .myBar {
   height: 3px;
   margin: 5px 0;
   border-radius: 20px;
   background-color: #2980b9;
 }
 @media screen and (max-width: 700px) {
-  .resumeSection .grid-row {
+  .resumeSection .container .grid-row {
     grid-template-columns: auto;
   }
 }

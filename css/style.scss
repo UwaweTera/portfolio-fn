@@ -859,42 +859,44 @@ body {
   font-family: $popFont;
 }
 .resumeSection {
-  .grid-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 30px;
-    row-gap: 30px;
-    .grid-col {
-      padding: 20px;
-      h4 {
-        font-size: 20px;
-        font-family: $popFont;
-      }
-      .border-btm {
-        border-bottom: 1px solid gainsboro;
-        padding: 10px 0;
-      }
-    }
-
-    .grid-row2 {
+  .container {
+    .grid-row {
       display: grid;
-      grid-template-rows: auto;
-      row-gap: 30px;
+      grid-template-columns: 1fr 1fr 1fr;
       column-gap: 30px;
-      .myProgress {
-        .myBar {
-          height: 3px;
-          margin: 5px 0;
-          border-radius: 20px;
-          background-color: $primaryColor;
+      row-gap: 30px;
+      .grid-col {
+        padding: 20px;
+        h4 {
+          font-size: 20px;
+          font-family: $popFont;
+        }
+        .border-btm {
+          border-bottom: 1px solid gainsboro;
+          padding: 10px 0;
+        }
+      }
+
+      .grid-row2 {
+        display: grid;
+        grid-template-rows: auto;
+        row-gap: 30px;
+        column-gap: 30px;
+        .myProgress {
+          .myBar {
+            height: 3px;
+            margin: 5px 0;
+            border-radius: 20px;
+            background-color: $primaryColor;
+          }
         }
       }
     }
-  }
 
-  @media screen and (max-width: 700px) {
-    .grid-row {
-      grid-template-columns: auto;
+    @media screen and (max-width: 700px) {
+      .grid-row {
+        grid-template-columns: auto;
+      }
     }
   }
 }
