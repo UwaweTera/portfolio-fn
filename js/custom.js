@@ -3,7 +3,7 @@ const userToken = localStorage.getItem("userToken");
 const parsedTokenData = JSON.parse(userToken);
 const header = new Headers();
 header.append("Content-Type", "application/json");
-if(parsedTokenData){
+if (parsedTokenData) {
   header.append("Authorization", `Bearer ${parsedTokenData.token}`);
 }
 
@@ -358,6 +358,82 @@ if (updateForm) {
   });
 }
 
+const projects = [
+  {
+    image: "../imgs/articles.png",
+    title: "Articles platform",
+    github: "https://github.com/UwaweTera/blogs-fn",
+    demo: "https://niceblogs.netlify.app/",
+  },
+  // {
+  //   image: "../imgs/shaka.png",
+  //   title: "E-commerce Platform",
+  //   demo: "https://your-demo-link.com"
+  // },
+  {
+    image: "../imgs/travel.png",
+    title: " Link Travel Agency",
+    demo: "https://linksvoyage.com/",
+  },
+  {
+    image: "../imgs/emr.png",
+    title: "  Empower Mental",
+    demo: "https://emr.skython.rw/",
+  },
+  {
+    image: "../imgs/youtube.png",
+    title: " Youtube Clone",
+    github: "https://github.com/UwaweTera/youtube_clone",
+    demo: "https://you2beclone.netlify.app/",
+  },
+  {
+    image: "../imgs/expense.png",
+    title: "Expense Trucker",
+    github: "https://github.com/UwaweTera/expense-tracker",
+    demo: "https://expense11tracker.netlify.app/",
+  },
+  // Add more projects as needed
+];
+
+function renderProjects() {
+  const projectsContainer = document.querySelector(".projects-container");
+  projectsContainer.innerHTML = '<div class="loading">Loading...</div>';
+  let projectsHTML = "";
+
+  projects.forEach((project) => {
+    projectsHTML += `
+      <div class="project-item border-2 border-gray-400 p-4 rounded-3xl">
+        <div class="project-item-img flex items-center justify-center">
+          <img src="${project.image}" alt="${
+      project.title
+    }" class="rounded-3xl h-[40vh] object-cover"/>
+        </div>
+        <div class="text-center p-3">
+          <div class="project-item-content">
+            <h1 class="project-item-title text-3xl font-semibold">${
+              project.title
+            }</h1>
+          </div>
+          <div class="project-item-btn mt-3 flex fle-col justify-center items-center gap-2">
+            ${
+              project.github
+                ? `<a href="${project.github}" target="_blank" class="btn border-2 border-gray-400 rounded-full px-3 py-2 hover:bg-indigo-900 hover:text-white">GitHub</a>`
+                : ""
+            }
+            <a href="${project.demo}" target="_blank"
+ class="btn border-2 border-gray-400 rounded-full px-3 py-2 hover:bg-indigo-900 hover:text-white">Live Demo</a>
+          </div>            
+        </div>
+      </div>
+    `;
+  });
+
+  setTimeout(() => {
+    projectsContainer.innerHTML = projectsHTML;
+  }, 1000);
+} // Call the function when the page loads
+document.addEventListener("DOMContentLoaded", renderProjects);
+
 /*
 ------------------------------------------------
 
@@ -607,7 +683,7 @@ if (commForm) {
       errorDis.style.color = "red";
     }
     if (userToken === null) {
-      stopLoader()
+      stopLoader();
       const coreMsg = "login before commenting";
       popup(coreMsg);
     }
@@ -623,11 +699,11 @@ if (commForm) {
       });
       const res = await response.json();
       if (res.comment == textValue) {
-        stopLoader()
+        stopLoader();
         const successMsg = "Complite to commenting";
         popup(successMsg);
       } else {
-        stopLoader()
+        stopLoader();
         setCommError(res);
       }
     } catch (error) {
