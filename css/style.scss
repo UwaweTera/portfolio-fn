@@ -26,6 +26,28 @@ $lighterColor: #f1f2f6;
 $popFont: "Poppins", sans-serif;
 $outFont: outfit;
 
+
+.main-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 1568px) {
+  .main-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+}
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0 0.75rem;
+  }
+}
+
 //container function
 @mixin container {
   width: 90%;
@@ -327,7 +349,6 @@ body {
   z-index: 999;
   background-color: $white;
   .cont {
-    @include container;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -699,10 +720,7 @@ body {
   display: flex;
   align-items: center;
   overflow: hidden;
-  justify-content: center;
-  .container {
-    @include container;
-  }
+  justify-content: space-between;
   .head-content {
     color: $darkBlue;
     display: inline-block;
