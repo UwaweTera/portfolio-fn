@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(typeWriter, 500);
 });
 
+
 // Stats counter animation
 document.addEventListener('DOMContentLoaded', function() {
     const statNumbers = document.querySelectorAll('.stat-number');
